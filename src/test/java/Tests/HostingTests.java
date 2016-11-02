@@ -3,6 +3,8 @@ package Tests;
 import DataProviders.DataProviders;
 import Pages.BuyHostingPage;
 import Pages.OrderHostingPage;
+import Pages.RegisterPage;
+import Pages.ShoppingCartPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -26,14 +28,17 @@ public class HostingTests {
 
     @BeforeMethod
     public void getPage(){
-        driver.get("https://www.crazydomains.com.au/windows-hosting/");
+        driver.get("https://www.crazydomains.com.au/web-hosting/");
     }
 
     @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
-    public void successHostingBuy(String os,int planNumber){
+    public void successHostingBuy(String os,int planNumber,String domainName){
         BuyHostingPage buyHostingPage=new BuyHostingPage(driver);
         buyHostingPage.selectHostingOs(os);
         OrderHostingPage orderHostingPage=buyHostingPage.buyHostingPlan(planNumber);
+        RegisterPage registerPage=orderHostingPage.orderHostingProduct(os,domainName);
+        ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
+
     }
 
     @AfterMethod

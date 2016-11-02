@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -41,6 +42,11 @@ public abstract class BasePage {
             return false;
         }
     }
+
+    public void randomClick(List<WebElement> list){
+        list.get((int) (Math.random()*(list.size()-1))).click();
+    }
+
 
     public void createProduct() {
 
