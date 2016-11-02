@@ -63,10 +63,10 @@ public class OrderHostingPage extends BasePage {
         if (planName.getText().equals("Business") && addonsCheckboxes.size()!=3){
             System.out.println("Incorrect Business addons number");
             return null;
-        }else if(addonsCheckboxes.size()!=5){
-            System.out.println("Incorrect Business addons number");
+        }else if(!planName.getText().equals("Business") && addonsCheckboxes.size()!=5 ){
+            System.out.println("Incorrect  addons number");
             return null;
-        }
+        }else
 
         for (int x = (int) (Math.random()*(addonsCheckboxes.size()-1));x<addonsCheckboxes.size()-1;x++) {
             randomClick(addonsCheckboxes);
