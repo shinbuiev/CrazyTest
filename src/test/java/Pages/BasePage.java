@@ -22,8 +22,6 @@ public abstract class BasePage {
 
     //--------------------------------------------------------------
 
-
-
     public BasePage(WebDriver driver) {
         PageFactory.initElements(driver,this);
         this.driver = driver;
@@ -34,7 +32,6 @@ public abstract class BasePage {
     public void waitForElement(WebElement element) {
         new WebDriverWait(driver,7).until(ExpectedConditions.visibilityOf(element));
     }
-
 
     public boolean isElementExist(WebElement element){
         try {
