@@ -21,7 +21,7 @@ public abstract class BaseBuyPage extends BasePage{
         this.eventDriver=eventDriver;
     }
 
-    public OrderHostingPage buyPlan(int plan){
+    public BaseOrderPage buyPlan(int plan){
         buyPlanButton.get(plan).click();
         return new OrderHostingPage(eventDriver);
     }
