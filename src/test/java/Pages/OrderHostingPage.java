@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * Created by Dmitriy.F on 02.11.2016.
  */
 public class OrderHostingPage extends BasePage {
-    private WebDriver driver;
+    private EventFiringWebDriver eventDriver;
 
 
     @CacheLookup
@@ -47,9 +48,9 @@ public class OrderHostingPage extends BasePage {
     @FindBy(className = "button_continue_order")
     private WebElement continueOrderButton;
 
-    public OrderHostingPage(WebDriver driver) {
-        super(driver);
-        this.driver=driver;
+    public OrderHostingPage(EventFiringWebDriver eventDriver) {
+        super(eventDriver);
+        this.eventDriver=eventDriver;
         waitForElement(continueOrderButton);
     }
 
@@ -75,7 +76,7 @@ public class OrderHostingPage extends BasePage {
         own_new_domainField.sendKeys(domainName);
         continueOrderButton.click();
 
-        return new RegisterPage(driver);
+        return new RegisterPage(eventDriver);
     }
 
 

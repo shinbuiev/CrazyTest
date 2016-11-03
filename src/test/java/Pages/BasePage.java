@@ -1,8 +1,10 @@
 package Pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,9 +15,9 @@ import java.util.concurrent.TimeUnit;
  * Created by Dmitriy.F on 02.11.2016.
  */
 public abstract class BasePage {
-    private WebDriver driver;
+    private EventFiringWebDriver eventDriver;
 
-    private String baseURL="https://manage.crazydomains.com.au/members/";
+
 
     //----Top menu -------------------------------------
 
@@ -23,15 +25,15 @@ public abstract class BasePage {
 
     //--------------------------------------------------------------
 
-    public BasePage(WebDriver driver) {
-        PageFactory.initElements(driver,this);
-        this.driver = driver;
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+    public BasePage(EventFiringWebDriver eventDriver) {
+        PageFactory.initElements(eventDriver,this);
+        this.eventDriver = eventDriver;
+        eventDriver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
 
 
     public void waitForElement(WebElement element) {
-        new WebDriverWait(driver,15).until(ExpectedConditions.visibilityOf(element));
+        new WebDriverWait(eventDriver,15).until(ExpectedConditions.visibilityOf(element));
     }
 
     public boolean isElementExist(WebElement element){

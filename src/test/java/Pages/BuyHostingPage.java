@@ -1,9 +1,11 @@
 package Pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.util.List;
 
@@ -11,7 +13,7 @@ import java.util.List;
  * Created by Dmitriy.F on 02.11.2016.
  */
 public class BuyHostingPage extends BasePage {
-    private WebDriver driver;
+    private EventFiringWebDriver eventDriver;
 
     @CacheLookup
     @FindBy(className = "linux")
@@ -25,9 +27,11 @@ public class BuyHostingPage extends BasePage {
 
 
 
-    public BuyHostingPage(WebDriver driver) {
-        super(driver);
-        this.driver=driver;
+
+
+    public BuyHostingPage(EventFiringWebDriver eventDriver) {
+        super(eventDriver);
+        this.eventDriver=eventDriver;
         waitForElement(linuxButton);
     }
 
@@ -42,7 +46,7 @@ public class BuyHostingPage extends BasePage {
 
     public OrderHostingPage buyHostingPlan(int plan){
         buyPlanButton.get(plan).click();
-        return new OrderHostingPage(driver);
+        return new OrderHostingPage(eventDriver);
     }
 
 
