@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Dmitriy.F on 03.11.2016.
  */
-public abstract class BaseOrderPage extends BasePage {
+public  class OrderPage extends BasePage {
     private EventFiringWebDriver eventDriver;
 
     @CacheLookup
@@ -45,7 +45,7 @@ public abstract class BaseOrderPage extends BasePage {
     @FindBy(className = "button_continue_order")
     private WebElement continueOrderButton;
 
-    public BaseOrderPage(EventFiringWebDriver eventDriver) {
+    public OrderPage(EventFiringWebDriver eventDriver) {
         super(eventDriver);
         this.eventDriver=eventDriver;
     }

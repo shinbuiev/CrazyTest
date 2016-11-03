@@ -1,7 +1,5 @@
 package Pages;
 
-import org.apache.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -10,11 +8,14 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import java.util.List;
 
 /**
- * Created by Dmitriy.F on 02.11.2016.
+ * Created by root on 03.11.16.
  */
-public class BuyHostingPage extends BaseBuyPage {
+public  class BuyPage extends BasePage{
     private EventFiringWebDriver eventDriver;
 
+    @CacheLookup
+    @FindBy(className = "withLoading")
+    private List<WebElement> buyPlanButton;
     @CacheLookup
     @FindBy(className = "linux")
     private WebElement linuxButton;
@@ -23,14 +24,17 @@ public class BuyHostingPage extends BaseBuyPage {
     private WebElement windowsButton;
 
 
-
-    public BuyHostingPage(EventFiringWebDriver eventDriver) {
+    public BuyPage(EventFiringWebDriver eventDriver) {
         super(eventDriver);
         this.eventDriver=eventDriver;
-        waitForElement(linuxButton);
     }
 
-    public BuyHostingPage selectHostingOs(String osName){
+    public OrderPage buyPlan(int plan){
+        buyPlanButton.get(plan).click();
+        return new OrderPage(eventDriver);
+    }
+
+    public BuyPage selectHostingOs(String osName){
         if (osName.equals("linux")){
             linuxButton.click();
         }else if(osName.equals("windows")){
@@ -38,9 +42,4 @@ public class BuyHostingPage extends BaseBuyPage {
         }
         return this;
     }
-
-
-
-
-
 }

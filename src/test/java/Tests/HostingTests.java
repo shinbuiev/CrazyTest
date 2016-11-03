@@ -2,12 +2,10 @@ package Tests;
 
 import DataProviders.DataProviders;
 import Listeners.EventHandler;
-import Pages.BuyHostingPage;
-import Pages.OrderHostingPage;
+import Pages.BuyPage;
+import Pages.OrderPage;
 import Pages.RegisterPage;
 import Pages.ShoppingCartPage;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -17,10 +15,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static org.apache.log4j.helpers.LogLog.error;
 
@@ -48,10 +43,10 @@ public class HostingTests {
 
     @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
     public void successHostingBuy(String os,int planNumber,String domainName){
-        BuyHostingPage buyHostingPage=new BuyHostingPage(eventDriver);
-        buyHostingPage.selectHostingOs(os);
-        OrderHostingPage orderHostingPage=buyHostingPage.buyPlan(planNumber);
-        RegisterPage registerPage=orderHostingPage.orderProduct(os,domainName);
+        BuyPage buyPage=new BuyPage(eventDriver);
+        buyPage.selectHostingOs(os);
+        OrderPage orderPage=buyPage.buyPlan(planNumber);
+        RegisterPage registerPage=orderPage.orderProduct(os,domainName);
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
 
     }

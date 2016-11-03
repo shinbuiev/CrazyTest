@@ -32,14 +32,14 @@ public class WebBuilderTests {
 
     @BeforeMethod
     public void getPage(){
-        eventDriver.get("https://www.crazydomains.com.au/web-hosting/");
+        eventDriver.get("https://www.crazydomains.com.au/web-builder/");
     }
 
     @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
     public void successHostingBuy(String os,int planNumber,String domainName){
-        BuyWebSiteBuilderPage buyWebSiteBuilderPage=new BuyWebSiteBuilderPage(eventDriver);
-        OrderWebSiteBuilderPage orderWebSiteBuilderPage=buyWebSiteBuilderPage.buyPlan(planNumber);
-        RegisterPage registerPage=orderHostingPage.orderProduct(os,domainName);
+        BuyPage buyPage=new BuyPage(eventDriver);
+        OrderPage orderPage=buyPage.buyPlan(planNumber);
+        RegisterPage registerPage=orderPage.orderProduct(os,domainName);
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
 
     }
