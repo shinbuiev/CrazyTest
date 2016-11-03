@@ -60,19 +60,20 @@ public class EventHandler implements WebDriverEventListener {
     }
 
     public void beforeClickOn(WebElement webElement, WebDriver webDriver) {
-        LOG.info("Should click WebElement - \'"+ webElement.getText()+"\', @FindBy(\""+path+"\")");
+
     }
 
     public void afterClickOn(WebElement webElement, WebDriver webDriver) {
-        LOG.info("Clicked successfull");
+
     }
 
     public void beforeChangeValueOf(WebElement webElement, WebDriver webDriver) {
-        LOG.info("Start changing WebElement \'"+webElement.getAttribute("name")+"\'");
+        LOG.info("Start changing WebElement @FindBy(\""+path+"\")");
     }
 
     public void afterChangeValueOf(WebElement webElement, WebDriver webDriver) {
-        LOG.info("WebElement \'"+webElement.getAttribute("name")+"\' changed value to \'"+webElement.getAttribute("value")+"\'");
+        LOG.info("WebElement @FindBy(\""+path+"\") changed value to \'"+webElement.getAttribute("value")+"\'");
+
     }
 
     public void beforeScript(String s, WebDriver webDriver) {
@@ -84,6 +85,6 @@ public class EventHandler implements WebDriverEventListener {
     }
 
     public void onException(Throwable throwable, WebDriver webDriver) {
-
+    LOG.error(throwable.getStackTrace());
     }
 }
