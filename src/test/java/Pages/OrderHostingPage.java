@@ -56,20 +56,15 @@ public class OrderHostingPage extends BasePage {
 
     public RegisterPage  orderHostingProduct(String osName,String domainName){
         randomClick(termRadiobuttons);
-        System.out.println(addonsCheckboxes.size());
-        System.out.println(planName.getText());
         if(osName.equals("linux")) {
             randomClick(yourLocation);
-        }
-        if (planName.getText().equals("Business") && addonsCheckboxes.size()!=3){
+        }if (planName.getText().equals("Business") && addonsCheckboxes.size()!=3){
             System.out.println("Incorrect Business addons number");
             return null;
         }else if(!planName.getText().equals("Business") && addonsCheckboxes.size()!=5 ){
             System.out.println("Incorrect  addons number");
             return null;
-        }else
-
-        for (int x = (int) (Math.random()*(addonsCheckboxes.size()-1));x<addonsCheckboxes.size()-1;x++) {
+        }else for (int x = (int) (Math.random()*(addonsCheckboxes.size()-1));x<addonsCheckboxes.size()-1;x++) {
             randomClick(addonsCheckboxes);
         }
         randomClick(own_new_domainRadiobutton);
