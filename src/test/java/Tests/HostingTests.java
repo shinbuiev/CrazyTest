@@ -34,7 +34,7 @@ public class HostingTests {
 
     @BeforeTest
     public void initial(){
-            System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "/home/frunoyman/Загрузки/chromedriver");
             driver=new ChromeDriver();
             eventDriver=new EventFiringWebDriver(driver);
             eventDriver.register(new EventHandler());
@@ -50,8 +50,8 @@ public class HostingTests {
     public void successHostingBuy(String os,int planNumber,String domainName){
         BuyHostingPage buyHostingPage=new BuyHostingPage(eventDriver);
         buyHostingPage.selectHostingOs(os);
-        OrderHostingPage orderHostingPage=buyHostingPage.buyHostingPlan(planNumber);
-        RegisterPage registerPage=orderHostingPage.orderHostingProduct(os,domainName);
+        OrderHostingPage orderHostingPage=buyHostingPage.buyPlan(planNumber);
+        RegisterPage registerPage=orderHostingPage.orderProduct(os,domainName);
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
 
     }

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Dmitriy.F on 02.11.2016.
  */
-public class BuyHostingPage extends BasePage {
+public class BuyHostingPage extends BaseBuyPage {
     private EventFiringWebDriver eventDriver;
 
     @CacheLookup
@@ -21,11 +21,6 @@ public class BuyHostingPage extends BasePage {
     @CacheLookup
     @FindBy(className = "windows")
     private WebElement windowsButton;
-    @CacheLookup
-    @FindBy(className = "withLoading")
-    private List<WebElement> buyPlanButton;
-
-
 
 
 
@@ -44,10 +39,7 @@ public class BuyHostingPage extends BasePage {
         return this;
     }
 
-    public OrderHostingPage buyHostingPlan(int plan){
-        buyPlanButton.get(plan).click();
-        return new OrderHostingPage(eventDriver);
-    }
+
 
 
 
