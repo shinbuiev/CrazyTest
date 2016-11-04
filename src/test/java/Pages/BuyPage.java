@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by root on 03.11.16.
  */
-public  class BuyPage extends BasePage{
+public  class BuyPage extends BasePage {
     private EventFiringWebDriver eventDriver;
 
     @CacheLookup
@@ -25,24 +25,46 @@ public  class BuyPage extends BasePage{
     @CacheLookup
     @FindBy(className = "menuItemContent")
     private List<WebElement> trafficBoosPages;
+    @CacheLookup
+    @FindBy(className = "more_info_btn")
+    private WebElement moreButton;
+    @CacheLookup
+    @FindBy(className = "menuItemContent")
+    private List<WebElement> webSiteBuilderOption;
+    @CacheLookup
+    @FindBy(className = "selectWrap")
+    private List<WebElement> webSiteBuilderDropdown;
 
 
     public BuyPage(EventFiringWebDriver eventDriver) {
         super(eventDriver);
-        this.eventDriver=eventDriver;
+        this.eventDriver = eventDriver;
     }
 
-    public OrderPage buyPlan(int plan){
+    public OrderPage buyPlan(int plan) {
         buyPlanButton.get(plan).click();
         return new OrderPage(eventDriver);
     }
 
-    public BuyPage selectHostingOs(String osName){
-        if (osName.equals("linux")){
+    //---------Web HOSTING SECTION-----------------------------
+    public BuyPage selectHostingOs(String osName) {
+        if (osName.equals("linux")) {
             linuxButton.click();
-        }else if(osName.equals("windows")){
+        } else if (osName.equals("windows")) {
             windowsButton.click();
         }
         return this;
     }
+//---------Web HOSTING SECTION-----------------------------
+
+
+    //---------Web BUILDER SECTION-----------------------------
+    public void selectBuilder(String sw, int plan) {
+        if (sw.equals("windows")) {
+            webSiteBuilderDropdown.get(plan/2).click();
+            webSiteBuilderOption.get(1).click();
+        }
+    }
 }
+
+

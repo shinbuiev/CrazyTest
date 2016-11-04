@@ -5,6 +5,8 @@ import Listeners.EventHandler;
 import Pages.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -24,6 +26,8 @@ public class WebBuilderTests {
     @BeforeTest
     public void initial(){
         System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver\\chromedriver.exe");
+        DesiredCapabilities capabilities=new DesiredCapabilities();
+        capabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY,"eager");
         driver=new ChromeDriver();
         eventDriver=new EventFiringWebDriver(driver);
         eventDriver.register(new EventHandler());
@@ -38,7 +42,8 @@ public class WebBuilderTests {
     @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
     public void successHostingBuy(String os,int planNumber,String domainName){
         BuyPage buyPage=new BuyPage(eventDriver);
-        OrderPage orderPage=buyPage.buyPlan(planNumber);
+        buyPage.selectBuilder(os,planNumber);
+        OrderPage orderPage=buyPage.buyPlan(planNumber*2);
         orderPage.chooseTerm();
         orderPage.chooseAddons();
         orderPage.fillDomainNameField(domainName);
@@ -46,10 +51,6 @@ public class WebBuilderTests {
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
     }
 
-    @AfterMethod // If any test crashed - take screenshot and write ERROR message in log file
-    public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
-
-    }
 
     @AfterTest
     public void testEnding(){

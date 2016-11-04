@@ -10,7 +10,7 @@ public class DataProviders {
     public static Object correctDomainNameGenerator(){
         String[]words={"dsdsdas","hghgh","awfxaa","ssghte","rrawsw","sdrfrr","asdawdw","awyuiii","juttrr","drrrs","det5ww",
                 "keeper","strong","little","nirvana","fallout"};
-        String[]tld={".com",".net",".au",".games",};
+        String[]tld={".com",".net",".games",};
         return words[(int) (Math.random()*words.length)]+words[(int) (Math.random()*words.length)]+tld[(int) (Math.random()*tld.length)];
     }
 
@@ -25,4 +25,5 @@ public class DataProviders {
                 {"windows",4,DataProviders.correctDomainNameGenerator()}
         };
     }
+
 }

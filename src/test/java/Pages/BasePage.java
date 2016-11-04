@@ -49,7 +49,6 @@ public abstract class BasePage {
         try {
             list.get((int) (Math.random() * (list.size() - 1))).click();
         }catch (Exception e){
-            System.out.println("No such element");
         }
     }
 

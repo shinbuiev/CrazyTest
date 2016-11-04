@@ -8,6 +8,8 @@ import Pages.RegisterPage;
 import Pages.ShoppingCartPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -54,10 +56,6 @@ public class HostingTests {
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
     }
 
-    @AfterMethod // If any test crashed - take screenshot and write ERROR message in log file
-    public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
-
-    }
 
     @AfterTest
     public void testEnding(){
