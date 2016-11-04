@@ -55,16 +55,16 @@ public  class BuyPage extends BasePage {
         }
         return this;
     }
-//---------Web HOSTING SECTION-----------------------------
+    //---------Web HOSTING SECTION-----------------------------
 
 
     //---------Web BUILDER SECTION-----------------------------
     public void selectBuilder(String sw, int plan) {
         if (sw.equals("windows")) {
-            webSiteBuilderDropdown.get(plan/2).click();
+            webSiteBuilderDropdown.get(plan / 2).click();
             webSiteBuilderOption.get(1).click();
         }
+             buyPlanButton.get(plan).click();
     }
+    //---------Web BUILDER SECTION-----------------------------
 }
-
-
