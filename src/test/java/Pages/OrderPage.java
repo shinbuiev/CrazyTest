@@ -59,8 +59,8 @@ public  class OrderPage extends BasePage {
     }
 
     public void chooseAddons(){
-        for (int x = (int) (Math.random()*(addonsCheckboxes.size()-1));x<addonsCheckboxes.size()-1;x++) {
-            randomClick(addonsCheckboxes);
+        for (int x = (int) (Math.random()*(addonsCheckboxes.size()));x<addonsCheckboxes.size();x++) {
+            addonsCheckboxes.get(x).click();
         }
     }
 

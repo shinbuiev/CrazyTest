@@ -54,6 +54,7 @@ public class HostingTests {
         orderPage.fillDomainNameField(domainName);
         RegisterPage registerPage=orderPage.orderProduct();
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
+        shoppingCartPage.emptyShoppingCart();
     }
 
 

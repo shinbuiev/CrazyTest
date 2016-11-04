@@ -15,10 +15,19 @@ public class ShoppingCartPage extends BasePage {
     @CacheLookup
     @FindBy(className = "check_out_button")
     private WebElement checkoutButton;
+    @CacheLookup
+    @FindBy(className = "buttonEmptyCart")
+    private WebElement buttonEmptyCart;
+    @CacheLookup
+    @FindBy(id = "cart_reset")
+    private WebElement cartResetButton;
 
     public ShoppingCartPage(EventFiringWebDriver eventDriver) {
         super(eventDriver);
         this.eventDriver=eventDriver;
         waitForElement(checkoutButton);
+    }
+
+    public void emptyShoppingCart(){
     }
 }
