@@ -29,7 +29,7 @@ public class HostingTests {
 
     @BeforeTest
     public void initial(){
-            System.setProperty("webdriver.chrome.driver", "/home/frunoyman/Загрузки/chromedriver");
+            System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver\\chromedriver.exe");
             driver=new ChromeDriver();
             eventDriver=new EventFiringWebDriver(driver);
             eventDriver.register(new EventHandler());
@@ -46,9 +46,12 @@ public class HostingTests {
         BuyPage buyPage=new BuyPage(eventDriver);
         buyPage.selectHostingOs(os);
         OrderPage orderPage=buyPage.buyPlan(planNumber);
-        RegisterPage registerPage=orderPage.orderProduct(os,domainName);
+        orderPage.chooseTerm();
+        orderPage.chooseLinuxLocation();
+        orderPage.chooseAddons();
+        orderPage.fillDomainNameField(domainName);
+        RegisterPage registerPage=orderPage.orderProduct();
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
-
     }
 
     @AfterMethod // If any test crashed - take screenshot and write ERROR message in log file

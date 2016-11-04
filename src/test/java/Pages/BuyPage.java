@@ -22,6 +22,9 @@ public  class BuyPage extends BasePage{
     @CacheLookup
     @FindBy(className = "windows")
     private WebElement windowsButton;
+    @CacheLookup
+    @FindBy(className = "menuItemContent")
+    private List<WebElement> trafficBoosPages;
 
 
     public BuyPage(EventFiringWebDriver eventDriver) {

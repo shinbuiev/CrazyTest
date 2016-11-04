@@ -8,7 +8,7 @@ import org.testng.annotations.DataProvider;
 public class DataProviders {
 
     public static Object correctDomainNameGenerator(){
-        String[]words={"papa","mama","sister","brother","super","puper","para","truper","dump","scrum","tester",
+        String[]words={"dsdsdas","hghgh","awfxaa","ssghte","rrawsw","sdrfrr","asdawdw","awyuiii","juttrr","drrrs","det5ww",
                 "keeper","strong","little","nirvana","fallout"};
         String[]tld={".com",".net",".au",".games",};
         return words[(int) (Math.random()*words.length)]+words[(int) (Math.random()*words.length)]+tld[(int) (Math.random()*tld.length)];

@@ -46,7 +46,11 @@ public abstract class BasePage {
     }
 
     public void randomClick(List<WebElement> list){
-        list.get((int) (Math.random()*(list.size()-1))).click();
+        try {
+            list.get((int) (Math.random() * (list.size() - 1))).click();
+        }catch (Exception e){
+            System.out.println("No such element");
+        }
     }
 
 
