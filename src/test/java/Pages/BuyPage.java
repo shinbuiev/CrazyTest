@@ -42,7 +42,11 @@ public  class BuyPage extends BasePage {
     }
 
     public OrderPage buyPlan(int plan) {
-        buyPlanButton.get(plan).click();
+        try {
+            buyPlanButton.get(plan).click();
+        }catch (Exception e){
+            buyPlanButton.get(plan+1).click();
+        }
         return new OrderPage(eventDriver);
     }
 
@@ -64,7 +68,7 @@ public  class BuyPage extends BasePage {
             webSiteBuilderDropdown.get(plan / 2).click();
             webSiteBuilderOption.get(1).click();
         }
-             buyPlanButton.get(plan).click();
+
     }
     //---------Web BUILDER SECTION-----------------------------
 }

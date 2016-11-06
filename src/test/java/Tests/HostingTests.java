@@ -31,7 +31,7 @@ public class HostingTests {
 
     @BeforeTest
     public void initial(){
-            System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "/home/frunoyman/Загрузки/chromedriver");
             driver=new ChromeDriver();
             eventDriver=new EventFiringWebDriver(driver);
             eventDriver.register(new EventHandler());

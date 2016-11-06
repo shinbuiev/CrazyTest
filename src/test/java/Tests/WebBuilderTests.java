@@ -25,7 +25,7 @@ public class WebBuilderTests {
 
     @BeforeTest
     public void initial(){
-        System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/home/frunoyman/Загрузки/chromedriver");
         DesiredCapabilities capabilities=new DesiredCapabilities();
         capabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY,"eager");
         driver=new ChromeDriver();
