@@ -35,7 +35,7 @@ public class EventHandler implements WebDriverEventListener {
     }
 
     public void beforeNavigateForward(WebDriver webDriver) {
-        LOG.info("Go to link- "+webDriver);
+
     }
 
     public void afterNavigateForward(WebDriver webDriver) {
@@ -77,11 +77,11 @@ public class EventHandler implements WebDriverEventListener {
     }
 
     public void beforeScript(String s, WebDriver webDriver) {
-
+    LOG.info("script before ");
     }
 
     public void afterScript(String s, WebDriver webDriver) {
-
+        LOG.info("script after ");
     }
 
     public void onException(Throwable throwable, WebDriver webDriver) {

@@ -33,7 +33,7 @@ public abstract class BasePage {
 
 
     public void waitForElement(WebElement element) {
-        new WebDriverWait(eventDriver,15).until(ExpectedConditions.visibilityOf(element));
+        new WebDriverWait(eventDriver,20).until(ExpectedConditions.visibilityOf(element));
     }
 
     public boolean isElementExist(WebElement element){

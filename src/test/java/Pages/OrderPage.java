@@ -39,6 +39,9 @@ public  class OrderPage extends BasePage {
     @FindBy(id = "search_domain_input")
     private WebElement own_new_domainField;
     @CacheLookup
+    @FindBy(className = "website_protection_domain")
+    private WebElement webSiteProtectionField;
+    @CacheLookup
     @FindBy(id = "total")
     private WebElement total;
     @CacheLookup
@@ -69,11 +72,16 @@ public  class OrderPage extends BasePage {
     }
 
     public void fillDomainNameField(String domainName){
-        own_new_domainField.sendKeys(domainName);
+        try {
+            own_new_domainField.sendKeys(domainName);
+        }catch (Exception e){
+            webSiteProtectionField.sendKeys(domainName);
+        }
     }
 
     public RegisterPage  orderProduct(){
         continueOrderButton.click();
         return new RegisterPage(eventDriver);
     }
+
 }
