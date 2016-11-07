@@ -108,10 +108,9 @@ public class EventHandler implements WebDriverEventListener {
 
 //---------Screenshot method---------------------------------------------------------------------
     public  void recordStep() throws AWTException, IOException {
-
         String date = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
         File screenS = ((TakesScreenshot)(driver)).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(screenS, new File("C:\\Automation\\chromedriver\\Screen\\"+BaseTest.testName+"\\"+element.getAttribute("class")+date+".jpg"));
+        FileUtils.copyFile(screenS, new File("C:\\Automation\\chromedriver\\Screen\\"+BaseTest.testName+"\\"+date+".jpg"));
     }
 //---------Screenshot method---------------------------------------------------------------------
 }
