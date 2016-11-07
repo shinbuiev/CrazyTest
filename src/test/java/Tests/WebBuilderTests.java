@@ -28,7 +28,7 @@ public class WebBuilderTests extends BaseTest {
 
     @BeforeMethod
     public void getPage(){
-        getEventDriver().get("C:\\Automation\\chromedriver\\chromedriver.exe");
+        getEventDriver().get("https://www.crazydomains.com.au/web-builder/");
     }
 
     @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
