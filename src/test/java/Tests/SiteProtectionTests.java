@@ -2,10 +2,7 @@ package Tests;
 
 import DataProviders.DataProviders;
 import Listeners.EventHandler;
-import Pages.BuyPage;
-import Pages.OrderPage;
-import Pages.RegisterPage;
-import Pages.ShoppingCartPage;
+import Pages.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.CapabilityType;
@@ -40,6 +37,7 @@ public class SiteProtectionTests extends BaseTest{
         RegisterPage registerPage=orderPage.orderProduct();
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
         shoppingCartPage.emptyShoppingCart();
+
     }
 
 

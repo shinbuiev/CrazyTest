@@ -1,15 +1,22 @@
 package Listeners;
 
 
+import Pages.BasePage;
 import Tests.BaseTest;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.LogManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.apache.log4j.Logger;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Dmitriy.F on 03.11.2016.
@@ -18,11 +25,14 @@ public class EventHandler implements WebDriverEventListener {
     private String path="";
     private static final Logger LOG = LogManager.getLogger(EventHandler.class);
     private WebElement element;
+    private WebDriver driver;
+    private String testName;
 
 
     public void beforeNavigateTo(String s, WebDriver webDriver) {
 
         LOG.info("Start running  "+ BaseTest.testName+ " and go to link- "+s);
+        driver=webDriver;
     }
 
     public void afterNavigateTo(String s, WebDriver webDriver) {
@@ -80,14 +90,28 @@ public class EventHandler implements WebDriverEventListener {
     }
 
     public void beforeScript(String s, WebDriver webDriver) {
-    LOG.info("script before ");
     }
 
     public void afterScript(String s, WebDriver webDriver) {
-        LOG.info("script after ");
     }
 
     public void onException(Throwable throwable, WebDriver webDriver) {
         LOG.error("Running test stop at WebElement "+element);
+        try {
+            recordStep();
+        } catch (AWTException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+//---------Screenshot method---------------------------------------------------------------------
+    public  void recordStep() throws AWTException, IOException {
+
+        String date = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
+        File screenS = ((TakesScreenshot)(driver)).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenS, new File("C:\\Automation\\chromedriver\\Screen\\"+BaseTest.testName+"\\"+element.getAttribute("class")+date+".jpg"));
+    }
+//---------Screenshot method---------------------------------------------------------------------
 }
