@@ -29,5 +29,8 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public void emptyShoppingCart(){
+        buttonEmptyCart.click();
+        waitForElement(cartResetButton);
+        cartResetButton.click();
     }
 }
