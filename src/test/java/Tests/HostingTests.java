@@ -25,27 +25,22 @@ import static org.apache.log4j.helpers.LogLog.error;
 /**
  * Created by Dmitriy.F on 02.11.2016.
  */
-public class HostingTests {
-    private EventFiringWebDriver eventDriver;
-    private WebDriver driver;
+public class HostingTests extends BaseTest {
+
 
     @BeforeTest
-    public void initial(){
-            System.setProperty("webdriver.chrome.driver", "/home/frunoyman/Загрузки/chromedriver");
-            driver=new ChromeDriver();
-            eventDriver=new EventFiringWebDriver(driver);
-            eventDriver.register(new EventHandler());
-            eventDriver.manage().window().maximize();
-        }
+    public void start(){
+        initial();
+    }
 
     @BeforeMethod
     public void getPage(){
-        eventDriver.get("https://www.crazydomains.com.au/web-hosting/");
+        getEventDriver().get("https://www.crazydomains.com.au/web-hosting/");
     }
 
     @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
     public void successHostingBuy(String os,int planNumber,String domainName){
-        BuyPage buyPage=new BuyPage(eventDriver);
+        BuyPage buyPage=new BuyPage(getEventDriver());
         buyPage.selectHostingOs(os);
         OrderPage orderPage=buyPage.buyPlan(planNumber);
         orderPage.chooseTerm();
@@ -60,7 +55,7 @@ public class HostingTests {
 
     @AfterTest
     public void testEnding(){
-        driver.quit();
+        getDriver().quit();
     }
 
 

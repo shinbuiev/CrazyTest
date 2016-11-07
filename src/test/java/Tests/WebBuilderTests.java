@@ -19,29 +19,21 @@ import java.io.IOException;
 /**
  * Created by root on 03.11.16.
  */
-public class WebBuilderTests {
-    private EventFiringWebDriver eventDriver;
-    private WebDriver driver;
+public class WebBuilderTests extends BaseTest {
 
     @BeforeTest
-    public void initial(){
-        System.setProperty("webdriver.chrome.driver", "/home/frunoyman/Загрузки/chromedriver");
-        DesiredCapabilities capabilities=new DesiredCapabilities();
-        capabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY,"eager");
-        driver=new ChromeDriver();
-        eventDriver=new EventFiringWebDriver(driver);
-        eventDriver.register(new EventHandler());
-        eventDriver.manage().window().maximize();
+    public void start(){
+        initial();
     }
 
     @BeforeMethod
     public void getPage(){
-        eventDriver.get("https://www.crazydomains.com.au/web-builder/");
+        getEventDriver().get("C:\\Automation\\chromedriver\\chromedriver.exe");
     }
 
     @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
     public void successHostingBuy(String os,int planNumber,String domainName){
-        BuyPage buyPage=new BuyPage(eventDriver);
+        BuyPage buyPage=new BuyPage(getEventDriver());
         buyPage.selectBuilder(os,planNumber);
         OrderPage orderPage=buyPage.buyPlan(planNumber*2);
         orderPage.chooseTerm();
@@ -55,7 +47,7 @@ public class WebBuilderTests {
 
     @AfterTest
     public void testEnding(){
-        driver.quit();
+        getDriver().quit();
     }
 
 

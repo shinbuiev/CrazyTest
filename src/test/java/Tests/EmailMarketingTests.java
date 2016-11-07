@@ -6,8 +6,10 @@ import Pages.BuyPage;
 import Pages.OrderPage;
 import Pages.RegisterPage;
 import Pages.ShoppingCartPage;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -18,29 +20,21 @@ import org.testng.annotations.BeforeTest;
 /**
  * Created by root on 06.11.16.
  */
-public class EmailMarketingTests {
-    private EventFiringWebDriver eventDriver;
-    private WebDriver driver;
+public class EmailMarketingTests extends BaseTest{
 
     @BeforeTest
-    public void initial(){
-        System.setProperty("webdriver.chrome.driver", "/home/frunoyman/Загрузки/chromedriver");
-        DesiredCapabilities capabilities=new DesiredCapabilities();
-        capabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY,"eager");
-        driver=new ChromeDriver();
-        eventDriver=new EventFiringWebDriver(driver);
-        eventDriver.register(new EventHandler());
-        eventDriver.manage().window().maximize();
+    public void start(){
+        initial();
     }
 
     @BeforeMethod
     public void getPage(){
-        eventDriver.get("https://www.crazydomains.com.au/email-marketing/");
+        getEventDriver().get("https://www.crazydomains.com.au/email-marketing/");
     }
 
     @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
     public void successHostingBuy(String os,int planNumber,String domainName){
-        BuyPage buyPage=new BuyPage(eventDriver);
+        BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber);
         orderPage.chooseTerm();
         RegisterPage registerPage=orderPage.orderProduct();
@@ -51,6 +45,6 @@ public class EmailMarketingTests {
 
     @AfterTest
     public void testEnding(){
-        driver.quit();
+        getDriver().quit();
     }
 }

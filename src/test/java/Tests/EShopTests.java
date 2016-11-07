@@ -18,29 +18,22 @@ import org.testng.annotations.BeforeTest;
 /**
  * Created by root on 06.11.16.
  */
-public class EShopTests {
-    private EventFiringWebDriver eventDriver;
-    private WebDriver driver;
+public class EShopTests extends BaseTest {
+
 
     @BeforeTest
-    public void initial(){
-        System.setProperty("webdriver.chrome.driver", "/home/frunoyman/Загрузки/chromedriver");
-        DesiredCapabilities capabilities=new DesiredCapabilities();
-        capabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY,"eager");
-        driver=new ChromeDriver();
-        eventDriver=new EventFiringWebDriver(driver);
-        eventDriver.register(new EventHandler());
-        eventDriver.manage().window().maximize();
+    public void start(){
+        initial();
     }
 
     @BeforeMethod
     public void getPage(){
-        eventDriver.get("https://www.crazydomains.com.au/eshop-builder/");
+        getEventDriver().get("https://www.crazydomains.com.au/eshop-builder/");
     }
 
     @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
     public void successHostingBuy(String os,int planNumber,String domainName){
-        BuyPage buyPage=new BuyPage(eventDriver);
+        BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber/2);
         orderPage.chooseTerm();
         orderPage.chooseAddons();
@@ -53,7 +46,7 @@ public class EShopTests {
 
     @AfterTest
     public void testEnding(){
-        driver.quit();
+        getDriver().quit();
     }
 
 

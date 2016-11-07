@@ -1,6 +1,7 @@
 package Listeners;
 
 
+import Tests.BaseTest;
 import org.apache.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,10 +17,12 @@ import java.io.File;
 public class EventHandler implements WebDriverEventListener {
     private String path="";
     private static final Logger LOG = LogManager.getLogger(EventHandler.class);
+    private WebElement element;
 
 
     public void beforeNavigateTo(String s, WebDriver webDriver) {
-    LOG.info("Go to link- "+s);
+
+        LOG.info("Start running  "+ BaseTest.testName+ " and go to link- "+s);
     }
 
     public void afterNavigateTo(String s, WebDriver webDriver) {
@@ -64,7 +67,7 @@ public class EventHandler implements WebDriverEventListener {
     }
 
     public void afterClickOn(WebElement webElement, WebDriver webDriver) {
-
+    element=webElement;
     }
 
     public void beforeChangeValueOf(WebElement webElement, WebDriver webDriver) {
@@ -85,6 +88,6 @@ public class EventHandler implements WebDriverEventListener {
     }
 
     public void onException(Throwable throwable, WebDriver webDriver) {
-    LOG.error(throwable.getStackTrace());
+        LOG.error("Running test stop at WebElement "+element);
     }
 }
