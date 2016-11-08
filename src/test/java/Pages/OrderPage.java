@@ -1,7 +1,8 @@
 package Pages;
 
+import DataProviders.DataProviders;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -9,11 +10,16 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.util.List;
 
+import static DataProviders.DataProviders.failedDomainNames;
+import static org.testng.Assert.assertTrue;
+
+
 /**
  * Created by Dmitriy.F on 03.11.2016.
  */
 public  class OrderPage extends BasePage {
     private EventFiringWebDriver eventDriver;
+
 
     @CacheLookup
     @FindBy(className = "main-title")
@@ -48,6 +54,9 @@ public  class OrderPage extends BasePage {
     @CacheLookup
     @FindBy(className = "button_continue_order")
     private WebElement continueOrderButton;
+    @CacheLookup
+    @FindBy(className = "requiredField")
+    private WebElement errorField;
 
     public OrderPage(EventFiringWebDriver eventDriver) {
         super(eventDriver);
@@ -68,8 +77,8 @@ public  class OrderPage extends BasePage {
         }
     }
 
-    public void chooseOwnNewDomain(){
-        randomClick(own_new_domainRadiobutton);
+    public void chooseNewDomain(){
+        own_new_domainRadiobutton.get(1).click();
     }
 
     public void fillDomainNameField(String domainName){
@@ -77,6 +86,31 @@ public  class OrderPage extends BasePage {
             own_new_domainField.sendKeys(domainName);
         }catch (NoSuchElementException e){
             webSiteProtectionField.sendKeys(domainName);
+        }
+    }
+
+    public void fillFailedDomainName(){
+    for(int x=0;x<failedDomainNames.length;x++){
+        try {
+            own_new_domainField.clear();
+            own_new_domainField.sendKeys(failedDomainNames[x]);
+            own_new_domainField.submit();
+        }catch (NoSuchElementException e){
+            webSiteProtectionField.clear();
+            webSiteProtectionField.sendKeys(failedDomainNames[x]);
+            webSiteProtectionField.submit();
+        }
+        assertTrue(isErrorUpear());
+    }
+    }
+
+    public boolean isErrorUpear(){
+        boolean appear=false;
+        try {
+            waitForElement(errorField);
+            return appear=true;
+        }catch (Exception e){
+           return appear=false;
         }
     }
 

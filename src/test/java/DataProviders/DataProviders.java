@@ -7,6 +7,10 @@ import org.testng.annotations.DataProvider;
  */
 public class DataProviders {
 
+    public static String[] failedDomainNames={"папамама.ру","@!#%$^^*&(.com","gsdgeee.molodets",
+    "dsddddd.dddd.ddddddddd.ddddddd.ddddd","\">","","     ","f"};
+
+
     public static Object correctDomainNameGenerator(){
         String[]words={"dsdsdas","hghgh","awfxaa","ssghte","rrawsw","sdrfrr","asdawdw","awyuiii","juttrr","drrrs","det5ww",
                 "keeper","strong","little","nirvana","fallout"};
@@ -14,8 +18,9 @@ public class DataProviders {
         return words[(int) (Math.random()*words.length)]+words[(int) (Math.random()*words.length)]+tld[(int) (Math.random()*tld.length)];
     }
 
+
     @DataProvider(name = "provider")
-    public static Object[][] hostingProvider(){
+    public static Object[][] Provider(){
         return new Object[][]{
                 {"linux",0,DataProviders.correctDomainNameGenerator()},
                 {"linux",2,DataProviders.correctDomainNameGenerator()},
@@ -23,6 +28,15 @@ public class DataProviders {
                 {"windows",0,DataProviders.correctDomainNameGenerator()},
                 {"windows",2,DataProviders.correctDomainNameGenerator()},
                 {"windows",4,DataProviders.correctDomainNameGenerator()}
+        };
+    }
+
+    @DataProvider(name = "plans")
+    public static Object[][] plans(){
+        return new Object[][]{
+                {0},
+                {2},
+                {4}
         };
     }
 
