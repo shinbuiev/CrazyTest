@@ -97,10 +97,9 @@ public class EventHandler implements WebDriverEventListener {
     }
 
     public void onException(Throwable throwable, WebDriver webDriver) {
-        String []errorMessages=throwable.getMessage().split("\\(Session");
+        String []errorMessages=throwable.getMessage().split("\n");
         errorMessage=errorMessages[0].replace("\":\"","=").replace("\"","").replace(":","-").trim();
-        System.out.println(errorMessage);
-        LOG.error(errorMessages[0]);
+        LOG.error(errorMessages[0].trim());
         recordStep();
     }
 
@@ -109,7 +108,7 @@ public class EventHandler implements WebDriverEventListener {
         try {
             String date = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
             File screenS = ((TakesScreenshot) (driver)).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(screenS, new File("C:\\Automation\\chromedriver\\Screen\\" + BaseTest.testName + "\\" + errorMessage + " " + date + ".jpg"));
+            FileUtils.copyFile(screenS, new File("C:\\Automation\\chromedriver\\Screen\\" + BaseTest.testName + "\\" + errorMessage +" "+ date + ".jpg"));
         }catch (Exception e){
             e.printStackTrace();
         }

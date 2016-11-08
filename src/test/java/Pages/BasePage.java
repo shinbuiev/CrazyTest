@@ -36,7 +36,7 @@ public abstract class BasePage {
     public BasePage(EventFiringWebDriver eventDriver) {
         PageFactory.initElements(eventDriver,this);
         this.eventDriver = eventDriver;
-        eventDriver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        eventDriver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
     }
 
 
