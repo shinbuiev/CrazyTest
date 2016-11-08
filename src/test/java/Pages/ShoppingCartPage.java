@@ -43,6 +43,7 @@ public class ShoppingCartPage extends BasePage {
         buttonEmptyCart.click();
         waitForElement(cartResetButton);
         cartResetButton.click();
+
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {

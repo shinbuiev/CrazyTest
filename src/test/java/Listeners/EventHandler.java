@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Dmitriy.F on 03.11.2016.
  */
-public class EventHandler extends AbstractWebDriverEventListener implements WebDriverEventListener {
+public class EventHandler implements WebDriverEventListener {
     private String path="";
     private static final Logger LOG = LogManager.getLogger(EventHandler.class);
     private WebElement element;

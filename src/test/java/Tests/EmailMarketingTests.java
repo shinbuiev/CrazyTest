@@ -10,6 +10,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertTrue;
+
 /**
  * Created by root on 06.11.16.
  */
@@ -33,6 +35,7 @@ public class EmailMarketingTests extends BaseTest{
         RegisterPage registerPage=orderPage.orderProduct();
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
         shoppingCartPage.emptyShoppingCart();
+        assertTrue(false);
     }
 
 
