@@ -28,7 +28,7 @@ public class SiteProtectionTests extends BaseTest{
         getEventDriver().get("https://www.crazydomains.com.au/website-protection/");
     }
 
-    @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
+    @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "provider")
     public void successProductBuy(String os,int planNumber,String domainName){
         BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber*0);
@@ -37,7 +37,6 @@ public class SiteProtectionTests extends BaseTest{
         RegisterPage registerPage=orderPage.orderProduct();
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
         shoppingCartPage.emptyShoppingCart();
-
     }
 
 

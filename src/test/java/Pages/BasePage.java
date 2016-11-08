@@ -41,17 +41,9 @@ public abstract class BasePage {
 
 
     public void waitForElement(WebElement element) {
-        new WebDriverWait(eventDriver,30).until(ExpectedConditions.visibilityOf(element));
+        new WebDriverWait(eventDriver,30).until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public boolean isElementExist(WebElement element){
-        try {
-            waitForElement(element);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
-    }
 
     public void randomClick(List<WebElement> list){
         try {

@@ -14,7 +14,7 @@ public class DataProviders {
         return words[(int) (Math.random()*words.length)]+words[(int) (Math.random()*words.length)]+tld[(int) (Math.random()*tld.length)];
     }
 
-    @DataProvider(name = "hostingProvider")
+    @DataProvider(name = "provider")
     public static Object[][] hostingProvider(){
         return new Object[][]{
                 {"linux",0,DataProviders.correctDomainNameGenerator()},

@@ -38,7 +38,7 @@ public class HostingTests extends BaseTest {
         getEventDriver().get("https://www.crazydomains.com.au/web-hosting/");
     }
 
-    @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
+    @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "provider")
     public void successProductBuy(String os,int planNumber,String domainName){
         BuyPage buyPage=new BuyPage(getEventDriver());
         buyPage.selectHostingOs(os);

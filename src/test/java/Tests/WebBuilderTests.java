@@ -31,7 +31,7 @@ public class WebBuilderTests extends BaseTest {
         getEventDriver().get("https://www.crazydomains.com.au/web-builder/");
     }
 
-    @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
+    @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "provider")
     public void successProductBuy(String os,int planNumber,String domainName){
         BuyPage buyPage=new BuyPage(getEventDriver());
         buyPage.selectBuilder(os,planNumber);

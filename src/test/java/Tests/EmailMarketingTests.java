@@ -33,7 +33,7 @@ public class EmailMarketingTests extends BaseTest{
         getEventDriver().get("https://www.crazydomains.com.au/email-marketing/");
     }
 
-    @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
+    @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "provider")
     public void successProductBuy(String os,int planNumber,String domainName){
         BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber);

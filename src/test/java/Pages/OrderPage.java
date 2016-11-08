@@ -19,7 +19,7 @@ public  class OrderPage extends BasePage {
     @FindBy(className = "main-title")
     private WebElement mainTitle;
     @CacheLookup
-    @FindBy(css = ".g-custom-radio._no-label")
+    @FindBy(xpath = ".//*[@id='crazy_order_webbuilder_form']/div[1]/div[2]/div/div/div/div/input")
     private List<WebElement> termRadiobuttons;
     @CacheLookup
     @FindBy(className = "plan-title-square")

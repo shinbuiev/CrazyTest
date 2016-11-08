@@ -7,6 +7,8 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by Dmitriy.F on 07.11.2016.
  */
@@ -23,7 +25,7 @@ public abstract class BaseTest {
         capabilities.setCapability(CapabilityType.PAGE_LOADING_STRATEGY,"eagle");
         driver=new ChromeDriver(capabilities);
         eventDriver=new EventFiringWebDriver(driver);
-        eventDriver.register(new EventHandler());
+        eventDriver.register(new EventHandler("#FFFF00", 1, 300, TimeUnit.MILLISECONDS));
         eventDriver.manage().window().maximize();
     }
 
