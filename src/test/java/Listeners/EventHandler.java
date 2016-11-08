@@ -105,7 +105,7 @@ public class EventHandler extends AbstractWebDriverEventListener implements WebD
     }
 
     public void beforeClickOn(WebElement webElement, WebDriver webDriver) {
-        flash(element, driver);
+        flash(webElement, webDriver);
     }
 
     public void afterClickOn(WebElement webElement, WebDriver webDriver) {
@@ -113,7 +113,7 @@ public class EventHandler extends AbstractWebDriverEventListener implements WebD
     }
 
     public void beforeChangeValueOf(WebElement webElement, WebDriver webDriver) {
-        flash(element, driver);
+        flash(webElement, webDriver);
         LOG.info("Start changing WebElement @FindBy(\""+path+"\")");
     }
 
