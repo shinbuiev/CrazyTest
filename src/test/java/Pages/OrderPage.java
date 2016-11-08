@@ -1,5 +1,6 @@
 package Pages;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -74,7 +75,7 @@ public  class OrderPage extends BasePage {
     public void fillDomainNameField(String domainName){
         try {
             own_new_domainField.sendKeys(domainName);
-        }catch (Exception e){
+        }catch (NoSuchElementException e){
             webSiteProtectionField.sendKeys(domainName);
         }
     }

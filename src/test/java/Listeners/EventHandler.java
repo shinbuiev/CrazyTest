@@ -27,6 +27,7 @@ public class EventHandler implements WebDriverEventListener {
     private WebElement element;
     private WebDriver driver;
     private String testName;
+    private static String errorMessage;
 
 
     public void beforeNavigateTo(String s, WebDriver webDriver) {
@@ -96,21 +97,22 @@ public class EventHandler implements WebDriverEventListener {
     }
 
     public void onException(Throwable throwable, WebDriver webDriver) {
-        LOG.error("Running test stop at WebElement "+element);
-        try {
-            recordStep();
-        } catch (AWTException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String []errorMessages=throwable.getMessage().split("\\(Session");
+        errorMessage=errorMessages[0].replace("\":\"","=").replace("\"","").replace(":","-").trim();
+        System.out.println(errorMessage);
+        LOG.error(errorMessages[0]);
+        recordStep();
     }
 
 //---------Screenshot method---------------------------------------------------------------------
-    public  void recordStep() throws AWTException, IOException {
-        String date = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
-        File screenS = ((TakesScreenshot)(driver)).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(screenS, new File("C:\\Automation\\chromedriver\\Screen\\"+BaseTest.testName+"\\"+date+".jpg"));
+    public  void recordStep() {
+        try {
+            String date = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
+            File screenS = ((TakesScreenshot) (driver)).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(screenS, new File("C:\\Automation\\chromedriver\\Screen\\" + BaseTest.testName + "\\" + errorMessage + " " + date + ".jpg"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 //---------Screenshot method---------------------------------------------------------------------
 }
