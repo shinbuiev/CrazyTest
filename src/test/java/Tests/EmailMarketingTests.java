@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -33,7 +34,7 @@ public class EmailMarketingTests extends BaseTest{
     }
 
     @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
-    public void successHostingBuy(String os,int planNumber,String domainName){
+    public void successProductBuy(String os,int planNumber,String domainName){
         BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber);
         orderPage.chooseTerm();

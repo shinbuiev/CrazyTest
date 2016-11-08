@@ -29,7 +29,7 @@ public class SiteProtectionTests extends BaseTest{
     }
 
     @org.testng.annotations.Test(dataProviderClass = DataProviders.class,dataProvider = "hostingProvider")
-    public void successHostingBuy(String os,int planNumber,String domainName){
+    public void successProductBuy(String os,int planNumber,String domainName){
         BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber*0);
         orderPage.chooseTerm();

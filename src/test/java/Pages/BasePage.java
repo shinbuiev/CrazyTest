@@ -36,12 +36,12 @@ public abstract class BasePage {
     public BasePage(EventFiringWebDriver eventDriver) {
         PageFactory.initElements(eventDriver,this);
         this.eventDriver = eventDriver;
-        eventDriver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+        eventDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
     }
 
 
     public void waitForElement(WebElement element) {
-        new WebDriverWait(eventDriver,20).until(ExpectedConditions.visibilityOf(element));
+        new WebDriverWait(eventDriver,30).until(ExpectedConditions.visibilityOf(element));
     }
 
     public boolean isElementExist(WebElement element){

@@ -21,6 +21,9 @@ public class ShoppingCartPage extends BasePage {
     @CacheLookup
     @FindBy(id = "cart_reset")
     private WebElement cartResetButton;
+    @CacheLookup
+    @FindBy(className = "_link-underlined")
+    private WebElement startAgainLink;
 
     public ShoppingCartPage(EventFiringWebDriver eventDriver) {
         super(eventDriver);
@@ -32,5 +35,6 @@ public class ShoppingCartPage extends BasePage {
         buttonEmptyCart.click();
         waitForElement(cartResetButton);
         cartResetButton.click();
+        waitForElement(startAgainLink);
     }
 }
