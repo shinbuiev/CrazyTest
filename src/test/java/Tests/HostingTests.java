@@ -32,7 +32,7 @@ public class HostingTests extends BaseTest {
         BuyPage buyPage=new BuyPage(getEventDriver());
         buyPage.selectHostingOs(os);
         OrderPage orderPage=buyPage.buyPlan(planNumber);
-        orderPage.chooseTerm();
+        orderPage.checkingTerm();
         orderPage.chooseLinuxLocation();
         orderPage.chooseAddons();
         orderPage.fillDomainNameField(domainName);

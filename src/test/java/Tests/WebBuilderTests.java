@@ -28,7 +28,7 @@ public class WebBuilderTests extends BaseTest {
         BuyPage buyPage=new BuyPage(getEventDriver());
         buyPage.selectBuilder(os,planNumber);
         OrderPage orderPage=buyPage.buyPlan(planNumber*2);
-        orderPage.chooseTerm();
+        orderPage.checkingTerm();
         orderPage.chooseAddons();
         orderPage.fillDomainNameField(domainName);
         RegisterPage registerPage=orderPage.orderProduct();

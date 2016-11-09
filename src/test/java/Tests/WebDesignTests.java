@@ -30,7 +30,7 @@ public class WebDesignTests extends BaseTest {
     public void successProductBuy(int planNumber,String domainName){
         BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber);
-        orderPage.chooseTerm();
+        orderPage.checkingTerm();
         orderPage.chooseAddons();
         orderPage.fillDomainNameField(domainName);
         RegisterPage registerPage=orderPage.orderProduct();
@@ -42,7 +42,7 @@ public class WebDesignTests extends BaseTest {
     public void failedProductBuy(int planNumber){
         BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber);
-        orderPage.chooseTerm();
+        orderPage.checkingTerm();
         orderPage.chooseAddons();
         orderPage.fillFailedDomainName();
     }

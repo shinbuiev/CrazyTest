@@ -30,7 +30,7 @@ public class EShopTests extends BaseTest {
     public void successProductBuy(String os,int planNumber,String domainName){
         BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber/2);
-        orderPage.chooseTerm();
+        orderPage.checkingTerm();
         orderPage.chooseAddons();
         orderPage.fillDomainNameField(domainName);
         RegisterPage registerPage=orderPage.orderProduct();
