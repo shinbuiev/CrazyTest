@@ -91,23 +91,17 @@ public  class OrderPage extends BasePage {
         while (count<termFields.size()){
             termFields.get(count).click();
             assertTrue(inputsTermRadiobuttons.get(count).isSelected());
-            term= Integer.parseInt(termDate.get(count).getText());
-            System.out.println("Term "+term);
+            term=Integer.parseInt(termDate.get(count).getText());
             if(count>0) {
                 cost = Double.parseDouble(termPromoCost.get(count2).getText().replace("$", "").trim().replace("/mo", "").trim());
-                System.out.println("Promo cost " + cost);
                 count2++;
                 count2++;
             }else
-                cost=Double.parseDouble(termCost.get(count).getText().replace("$","").replace("/mo","").trim());
-                System.out.println("simple cost "+cost);
-            expectedTotal= (int) (term*cost);
-            System.out.println("expected total "+expectedTotal);
-            actualtotal=Integer.parseInt(total.getText().trim().replace(".00",""));
-            System.out.println("Actual total "+ actualtotal);
+            cost=Double.parseDouble(termCost.get(count).getText().replace("$","").replace("/mo","").trim());
+            expectedTotal= (int) Math.round(term*cost);
+            actualtotal=Integer.parseInt(total.getText().trim().replace(".00","").replace(",",""));
             assertEquals(actualtotal,expectedTotal,"Not equals");
             count++;
-            System.out.println(count);
         }
     }
 
