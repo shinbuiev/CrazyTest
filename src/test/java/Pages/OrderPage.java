@@ -83,26 +83,21 @@ public  class OrderPage extends BasePage {
 
     public void checkingTerm(){
         int count=0;
+        int count2=1;
         int term;
         double cost;
         int expectedTotal=0;
         int actualtotal=0;
-        List<WebElement> costs = null;
-        System.out.println(termPromoCost.size());
-        for (int x=0;x<termPromoCost.size();x++){
-            if (!termPromoCost.get(x).getText().equals("")) {
-                System.out.println(x);
-                System.out.println(termPromoCost.get(x).getText());
-            }
-        }
         while (count<termFields.size()){
             termFields.get(count).click();
             assertTrue(inputsTermRadiobuttons.get(count).isSelected());
             term= Integer.parseInt(termDate.get(count).getText());
             System.out.println("Term "+term);
-            if(!termPromoCost.get(count).getText().equals("")) {
-                cost = Double.parseDouble(termPromoCost.get(count).getText().replace("$", "").trim().replace("/mo", "").trim());
+            if(count>0) {
+                cost = Double.parseDouble(termPromoCost.get(count2).getText().replace("$", "").trim().replace("/mo", "").trim());
                 System.out.println("Promo cost " + cost);
+                count2++;
+                count2++;
             }else
                 cost=Double.parseDouble(termCost.get(count).getText().replace("$","").replace("/mo","").trim());
                 System.out.println("simple cost "+cost);
