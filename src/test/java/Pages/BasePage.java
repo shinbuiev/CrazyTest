@@ -41,7 +41,17 @@ public abstract class BasePage {
 
 
     public void waitForElement(WebElement element) {
-        new WebDriverWait(eventDriver,5).until(ExpectedConditions.visibilityOf(element));
+        new WebDriverWait(eventDriver,2).until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public boolean ifElementExist(WebElement element){
+        boolean exist=false;
+        try {
+            waitForElement(element);
+            return exist=true;
+        }catch (Exception e){
+            return exist=false;
+        }
     }
 
 

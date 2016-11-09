@@ -43,6 +43,8 @@ public class EventHandler implements WebDriverEventListener {
 
     private void flash(WebElement element, WebDriver driver) {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
+        js.executeScript("scrollTo(0, " + (element.getLocation()
+        .getY()-driver.manage().window().getSize().getHeight()/2) + ")"); //Super scroll
         String bgcolor = element.getCssValue("backgroundColor");
         for (int i = 0; i < count; i++) {
             changeColor(color, element, js);

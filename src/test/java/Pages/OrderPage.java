@@ -85,28 +85,31 @@ public  class OrderPage extends BasePage {
         int count=0;
         int term;
         double cost;
-
         int expectedTotal=0;
         int actualtotal=0;
-        int tot=0;
-        for(int x=0;x<termPromoCost.size();x++){
-            System.out.println(termCost.get(x).getText());
-            System.out.println(termPromoCost.get(x).getText());
+        List<WebElement> costs = null;
+        System.out.println(termPromoCost.size());
+        for (int x=0;x<termPromoCost.size();x++){
+            if (!termPromoCost.get(x).getText().equals("")) {
+                System.out.println(x);
+                System.out.println(termPromoCost.get(x).getText());
+            }
         }
         while (count<termFields.size()){
             termFields.get(count).click();
             assertTrue(inputsTermRadiobuttons.get(count).isSelected());
             term= Integer.parseInt(termDate.get(count).getText());
-            try {
+            System.out.println("Term "+term);
+            if(!termPromoCost.get(count).getText().equals("")) {
+                cost = Double.parseDouble(termPromoCost.get(count).getText().replace("$", "").trim().replace("/mo", "").trim());
+                System.out.println("Promo cost " + cost);
+            }else
                 cost=Double.parseDouble(termCost.get(count).getText().replace("$","").replace("/mo","").trim());
-            }catch (Exception e){
-                cost= Double.parseDouble(termPromoCost.get(count).getText().replace("$","").trim().replace("/mo","").trim());
-            }
+                System.out.println("simple cost "+cost);
             expectedTotal= (int) (term*cost);
-            tot=Integer.parseInt(total.getText().trim().replace(".00",""));
-            System.out.println(tot);
-            actualtotal= tot;
-            System.out.println(actualtotal==expectedTotal);
+            System.out.println("expected total "+expectedTotal);
+            actualtotal=Integer.parseInt(total.getText().trim().replace(".00",""));
+            System.out.println("Actual total "+ actualtotal);
             assertEquals(actualtotal,expectedTotal,"Not equals");
             count++;
             System.out.println(count);
