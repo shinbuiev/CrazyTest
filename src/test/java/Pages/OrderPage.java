@@ -27,7 +27,7 @@ public  class OrderPage extends BasePage {
     @FindBy(className = "main-title")
     private WebElement mainTitle;
     @CacheLookup
-    @FindBy(className = "order_table_row_js")
+    @FindBy(css = "._between>._hover>.order_table_row_js")
     private List<WebElement> termFields;
     @CacheLookup
     @FindBy(css = ".item-name>span")
