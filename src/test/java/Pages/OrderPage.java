@@ -26,7 +26,10 @@ public  class OrderPage extends BasePage {
     private WebElement mainTitle;
     @CacheLookup
     @FindBy(xpath = ".//*[@id='crazy_order_webbuilder_form']/div[1]/div[2]/div/div/div/div/input")
-    private List<WebElement> termRadiobuttons;
+    private List<WebElement> inputsTermRadiobuttons;
+    @CacheLookup
+    @FindBy(css = "._between>._hover>.order_table_row_js")
+    private List<WebElement> termFields;
     @CacheLookup
     @FindBy(className = "plan-title-square")
     private WebElement planName;
@@ -68,7 +71,7 @@ public  class OrderPage extends BasePage {
     }
 
     public void chooseTerm(){
-        randomClick(termRadiobuttons);
+        randomClick(termFields);
     }
 
     public void chooseAddons(){

@@ -35,7 +35,6 @@ public class EmailMarketingTests extends BaseTest{
         RegisterPage registerPage=orderPage.orderProduct();
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
         shoppingCartPage.emptyShoppingCart();
-        assertTrue(false);
     }
 
 

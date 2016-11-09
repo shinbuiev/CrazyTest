@@ -1,8 +1,11 @@
 package Tests;
 
 import Listeners.EventHandler;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -18,8 +21,10 @@ public abstract class BaseTest {
 
     public void initial(){
         this.testName=this.getClass().getName();
-        System.setProperty("webdriver.chrome.driver", "/home/frunoyman/Загрузки/chromedriver");
-        driver=new ChromeDriver();
+        System.setProperty("webdriver.chrome.driver", "C:\\\\Automation\\\\chromedriver\\\\chromedriver.exe");
+        DesiredCapabilities capabilities=new DesiredCapabilities();
+        capabilities.setCapability(CapabilityType.PAGE_LOADING_STRATEGY,"eagle");
+        driver=new ChromeDriver(capabilities);
         eventDriver=new EventFiringWebDriver(driver);
         eventDriver.register(new EventHandler("#FFFF00", 1, 300, TimeUnit.MILLISECONDS));
         eventDriver.manage().window().maximize();

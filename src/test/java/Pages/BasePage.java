@@ -47,7 +47,7 @@ public abstract class BasePage {
 
     public void randomClick(List<WebElement> list){
         try {
-            list.get((int) (Math.random() * (list.size() - 1))).click();
+            list.get((int) (Math.random() * list.size())).click();
         }catch (Exception e){
         }
     }
