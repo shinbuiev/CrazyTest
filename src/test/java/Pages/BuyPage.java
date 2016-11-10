@@ -39,6 +39,7 @@ public  class BuyPage extends BasePage {
     public BuyPage(EventFiringWebDriver eventDriver) {
         super(eventDriver);
         this.eventDriver = eventDriver;
+        moreButton.click();
     }
 
     public OrderPage buyPlan(int plan) {
@@ -68,6 +69,11 @@ public  class BuyPage extends BasePage {
             webSiteBuilderDropdown.get(plan / 2).click();
             webSiteBuilderOption.get(1).click();
         }
+
+    }
+    public void selectPagesNumber (int planNumber, int pagesNumber) {
+        webSiteBuilderDropdown.get(planNumber-1).click();
+        webSiteBuilderOption.get(pagesNumber-1).click();
 
     }
     //---------Web BUILDER SECTION-----------------------------

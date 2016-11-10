@@ -1,13 +1,14 @@
 package Tests;
 
 import Listeners.EventHandler;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -20,14 +21,16 @@ public abstract class BaseTest {
 
 
     public void initial(){
-        this.testName=this.getClass().getName();
-        System.setProperty("webdriver.chrome.driver", "C:\\\\Automation\\\\chromedriver\\\\chromedriver.exe");
-        DesiredCapabilities capabilities=new DesiredCapabilities();
-        capabilities.setCapability(CapabilityType.PAGE_LOADING_STRATEGY,"eagle");
-        driver=new ChromeDriver(capabilities);
+        testName=this.getClass().getName();
+        System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver\\chromedriver.exe");
+        driver=new ChromeDriver();
+
         eventDriver=new EventFiringWebDriver(driver);
+
+        eventDriver.manage().window().setSize(new Dimension(1080, 1520));
+        eventDriver.manage().window().setPosition(new Point(2560, -120));
+//        eventDriver.manage().window().maximize();
         eventDriver.register(new EventHandler("#FFFF00", 1, 300, TimeUnit.MILLISECONDS));
-        eventDriver.manage().window().maximize();
     }
 
     public WebDriver getDriver() {

@@ -44,6 +44,18 @@ public abstract class BasePage {
         new WebDriverWait(eventDriver,5).until(ExpectedConditions.visibilityOf(element));
     }
 
+    public void waitForElementIsClickable (WebElement element) {
+        new WebDriverWait(eventDriver,15).until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void waitForElementIsInvisible (WebElement element) {
+        new WebDriverWait(eventDriver,15).until(ExpectedConditions.stalenessOf(element));
+    }
+
+    public void waitForTitle(String s) {
+        new WebDriverWait(eventDriver,15).until(ExpectedConditions.urlContains(s));
+    }
+
 
     public void randomClick(List<WebElement> list){
         try {

@@ -27,6 +27,8 @@ public  class OrderPage extends BasePage {
     @CacheLookup
     @FindBy(xpath = ".//*[@id='crazy_order_webbuilder_form']/div[1]/div[2]/div/div/div/div/input")
     private List<WebElement> inputsTermRadiobuttons;
+    @FindBy(css = ".g-custom-radio._no-label")
+    private List<WebElement> termRadiobuttons;
     @CacheLookup
     @FindBy(css = "._between>._hover>.order_table_row_js")
     private List<WebElement> termFields;
