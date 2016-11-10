@@ -8,6 +8,7 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static DataProviders.DataProviders.failedDomainNames;
@@ -36,10 +37,10 @@ public  class OrderPage extends BasePage {
     @FindBy(css = ".g-custom-radio>.product_element")
     private List<WebElement> inputsTermRadiobuttons;
     @CacheLookup
-    @FindBy(className = "price-promo")
+    @FindBy(xpath = ".//*[@id='crazy_order_webbuilder_form']/div[1]/div[2]/div/div/div/span[2][@class='price-promo']")
     private List<WebElement> termPromoCost;
     @CacheLookup
-    @FindBy(css = ".table-details>span.price-now")
+    @FindBy(css = "span.price-now:first-of-type")
     private List<WebElement> termCost;
     @CacheLookup
     @FindBy(className = "plan-title-square")
@@ -81,26 +82,24 @@ public  class OrderPage extends BasePage {
         randomClick(yourLocation);
     }
 
-    public void checkingTerm(){
-        int count=0;
-        int count2=1;
-        int term;
-        double cost;
-        int expectedTotal=0;
-        int actualtotal=0;
-        while (count<termFields.size()){
+    public void checkingTerm() {
+        int count = 0;
+        int term = 0;
+        double cost = 0;
+        int expectedTotal = 0;
+        int actualtotal = 0;
+        while (count < termFields.size()) {
             termFields.get(count).click();
             assertTrue(inputsTermRadiobuttons.get(count).isSelected());
-            term=Integer.parseInt(termDate.get(count).getText());
-            if(count>0) {
-                cost = Double.parseDouble(termPromoCost.get(count2).getText().replace("$", "").trim().replace("/mo", "").trim());
-                count2++;
-                count2++;
-            }else
-            cost=Double.parseDouble(termCost.get(count).getText().replace("$","").replace("/mo","").trim());
-            expectedTotal= (int) Math.round(term*cost);
-            actualtotal=Integer.parseInt(total.getText().trim().replace(".00","").replace(",",""));
-            assertEquals(actualtotal,expectedTotal,"Not equals");
+            term = Integer.parseInt(termDate.get(count).getText());
+            if (termPromoCost.get(count).getText().equals("")) {
+                cost = Double.parseDouble(termCost.get(count).getText().replace("$", "").replace("/mo", "").trim());
+            } else
+                cost = Double.parseDouble(termPromoCost.get(count).getText().replace("$", "").trim().replace("/mo", "").trim());
+
+            expectedTotal = (int) Math.round(term * cost);
+            actualtotal = Integer.parseInt(total.getText().trim().replace(".00", "").replace(",", ""));
+            assertEquals(actualtotal, expectedTotal, "Not equals");
             count++;
         }
     }
