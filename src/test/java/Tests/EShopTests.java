@@ -26,7 +26,7 @@ public class EShopTests extends BaseTest {
         getEventDriver().get("https://www.crazydomains.com.au/eshop-builder/");
     }
 
-    @Test(dataProviderClass = DataProviders.class,dataProvider = "plan")
+    @Test(dataProviderClass = DataProviders.class,dataProvider = "plans")
     public void successProductBuy(int planNumber){
         BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber/2);
