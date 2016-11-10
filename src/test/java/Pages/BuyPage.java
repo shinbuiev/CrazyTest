@@ -42,7 +42,7 @@ public  class BuyPage extends BasePage {
     }
 
     public OrderPage buyPlan(int plan) {
-        try {
+        try{
             buyPlanButton.get(plan).click();
         }catch (Exception e){
             buyPlanButton.get(plan+1).click();

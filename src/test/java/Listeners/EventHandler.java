@@ -31,8 +31,6 @@ public class EventHandler  implements WebDriverEventListener {
     private EventFiringWebDriver eventDriver;
 
     public static final Logger LOG = LogManager.getLogger(EventHandler.class);
-    private WebElement element;
-    private String testName;
     private static String errorMessage;
     private long interval;
     private final int count;
@@ -115,7 +113,6 @@ public class EventHandler  implements WebDriverEventListener {
     }
 
     public void afterClickOn(WebElement webElement, WebDriver webDriver) {
-    element=webElement;
     }
 
     public void beforeChangeValueOf(WebElement webElement, WebDriver webDriver) {
@@ -133,7 +130,7 @@ public class EventHandler  implements WebDriverEventListener {
 
     public void onException(Throwable throwable, WebDriver webDriver) {
         String []errorMessages=throwable.getMessage().split("\n");
-        errorMessage=errorMessages[0].replace("\":\"","=").replace("\"","").replace(":","-").replace("<","").replace(">","").trim();
+        errorMessage=errorMessages[0].replace("\":\"","=").replace("\"","").replace(":","-").replace("<","").replace(">","").replace("/","").trim();
         LOG.error(errorMessages[0].trim());
         takeScreen(eventDriver,errorMessage);
     }

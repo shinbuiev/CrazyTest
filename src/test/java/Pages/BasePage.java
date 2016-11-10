@@ -44,7 +44,7 @@ public abstract class BasePage {
 
 
     public void waitForElement(WebElement element) {
-        new WebDriverWait(eventDriver,5).until(ExpectedConditions.visibilityOf(element));
+        new WebDriverWait(eventDriver,4).until(ExpectedConditions.visibilityOf(element));
     }
 
 
@@ -60,8 +60,8 @@ public abstract class BasePage {
     public  static void takeScreen(EventFiringWebDriver recDriver,String eoorMess) {
         try {
             String date = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
-            File screenS = ((TakesScreenshot) (recDriver)).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(screenS, new File("C:\\Automation\\chromedriver\\Screen\\" + BaseTest.testName + "\\" + eoorMess +" "+ date + ".jpg"));
+            File screenS = recDriver.getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(screenS, new File("C:\\Automation\\chromedriver\\Screen\\" + BaseTest.testName + "\\" + eoorMess +"("+ date + ").jpg"));
         }catch (Exception e){
             e.printStackTrace();
         }

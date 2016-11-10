@@ -22,12 +22,12 @@ public class DataProviders {
     @DataProvider(name = "provider")
     public static Object[][] Provider(){
         return new Object[][]{
-                {"linux",0,DataProviders.corrDomainGenerator()},
-                {"linux",2,DataProviders.corrDomainGenerator()},
-                {"linux",4,DataProviders.corrDomainGenerator()},
-                {"windows",0,DataProviders.corrDomainGenerator()},
-                {"windows",2,DataProviders.corrDomainGenerator()},
-                {"windows",4,DataProviders.corrDomainGenerator()}
+                {"linux",0},
+                {"linux",2},
+                {"linux",4},
+                {"windows",0},
+                {"windows",2},
+                {"windows",4}
         };
     }
 

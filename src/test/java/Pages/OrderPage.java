@@ -25,10 +25,10 @@ import static org.testng.Assert.*;
 public  class OrderPage extends BasePage {
     private EventFiringWebDriver eventDriver;
 
-
+    //--------Order Page WebElements ------------------------------
     @CacheLookup
     @FindBy(className = "main-title")
-    private WebElement mainTitle;
+    private WebElement mainTitle;                                   //-
     @CacheLookup
     @FindBy(css = "._between>._hover>.order_table_row_js")
     private List<WebElement> termFields;
@@ -51,8 +51,11 @@ public  class OrderPage extends BasePage {
     @FindBy(className = "select-server-box")
     private List<WebElement> yourLocation;
     @CacheLookup
-    @FindBy(className = "g-custom-checkbox")
+    @FindBy(css = ".g-custom-checkbox>.product_element")
     private List<WebElement>addonsCheckboxes;
+    @CacheLookup
+    @FindBy(xpath = ".//*[@id='crazy_order_webbuilder_form']/div[2]/div[2]/div")
+    private List<WebElement>addonsFields;
     @CacheLookup
     @FindBy(css = ".bold.item-name")
     private List<WebElement>addonsDescription;
@@ -74,16 +77,26 @@ public  class OrderPage extends BasePage {
     @CacheLookup
     @FindBy(css = ".input>.requiredField")
     private WebElement errorField;
+    @CacheLookup
+    @FindBy(className = "globalTip")
+    private List<WebElement> toolTops;
 
+    //--------Order Page WebElements ------------------------------
+
+    //--------Constructor  ------------------------------
     public OrderPage(EventFiringWebDriver eventDriver) {
         super(eventDriver);
         this.eventDriver=eventDriver;
     }
+    //--------Constructor  ------------------------------
 
+    //--------Choose Location for Hosting Provider  ------------------------------
     public void chooseLinuxLocation(){
         randomClick(yourLocation);
     }
+    //--------Choose Location for Hosting Provider  ------------------------------
 
+    //--------Check all Terms/Cost(promo) , changing total  ------------------------------
     public void checkingTerm() {
         int count = 0;
         int term = 0;
@@ -92,8 +105,11 @@ public  class OrderPage extends BasePage {
         int actualTotal = 0;
         while (count < termFields.size()) {
             termFields.get(count).click();
+            if(!inputsTermRadiobuttons.get(count).isSelected()){
+            takeScreen(eventDriver,"Plan option "+(termDate.get(count).getText())+" uncheckable");
+            }
             assertTrue(inputsTermRadiobuttons.get(count).isSelected());
-            LOG.info("RadioButton \""+termDate.get(count).getText()+"\" month is checked");
+            LOG.info("RadioButton \""+termDate.get(count).getText()+" month\" is checked");
             term = Integer.parseInt(termDate.get(count).getText());
             if (termPromoCost.get(count).getText().equals("")) {
             cost = Double.parseDouble(termCost.get(count).getText().replace("$", "").replace("/mo", "").trim());
@@ -101,21 +117,37 @@ public  class OrderPage extends BasePage {
             cost = Double.parseDouble(termPromoCost.get(count).getText().replace("$", "").trim().replace("/mo", "").trim());
             expectedTotal = (int) Math.round(term * cost);
             actualTotal = Integer.parseInt(total.getText().trim().replace(".00", "").replace(",", ""));
-            assertEquals(actualTotal, expectedTotal, "Not equals");
-            LOG.info("Expected total : "+expectedTotal+"$ equals Actual total: "+actualTotal+"$");
+            if (actualTotal!=expectedTotal){
+            takeScreen(eventDriver,"Total not equals at Plan options "+term+" month");
+            }
+            assertEquals(actualTotal, expectedTotal);
             count++;
         }
     }
+    //--------Check all Terms/Cost(promo) , changing total  ------------------------------
 
+    //--------Check all Addons  ------------------------------
     public void chooseAddons(){
-        for (int x = (int) (Math.random()*(addonsCheckboxes.size()));x<addonsCheckboxes.size();x++) {
-            addonsCheckboxes.get(x).click();
+        int count=0;
+        while (count<addonsFields.size()){
+            addonsFields.get(count).click();
+            if(!addonsCheckboxes.get(count).isSelected()){
+                takeScreen(eventDriver,"Addon \""+addonsDescription.get(count).getText()+"\" not add to the product");
+            }
+            assertTrue(addonsCheckboxes.get(count).isSelected());
+            LOG.info("Addon \""+addonsDescription.get(count).getText()+"\" add to the product");
+            count++;
         }
-    }
 
+    }
+    //--------Check all Addons  ------------------------------
+
+    //--------Choose New/Own Domain  ------------------------------
     public void chooseNewDomain(){
         own_new_domainRadiobutton.get(1).click();
     }
+    //--------Choose New/Own Domain  ------------------------------
+
 
     public void fillCorrectDomainName(){
         try {
@@ -125,8 +157,9 @@ public  class OrderPage extends BasePage {
             webSiteProtectionField.clear();
             webSiteProtectionField.sendKeys(corrDomainGenerator());
         }
+        total.click();
     }
-
+    //--------Fill Domain name fields with failed names ------------------------------
     public void fillFailedDomainName(){
     for(int x=0;x<failedDomainNames.length;x++){
         try {
@@ -141,22 +174,28 @@ public  class OrderPage extends BasePage {
         assertTrue(isErrorAppear());
     }
     }
+    //--------Fill Domain name fields with failed names ------------------------------
 
+    //--------Check is error message at Domain name field appear ------------------------------
     public boolean isErrorAppear(){
         boolean appear=false;
         try {
             waitForElement(errorField);
             return appear=true;
         }catch (Exception e){
+           LOG.error("Domain name validation error message not appear!");
            takeScreen(eventDriver,"Domain name validation error message not appear!");
            return appear=false;
         }
     }
+    //--------Check is error message at Domain name field appear ------------------------------
 
+
+    //--------Click on Order Product button ------------------------------
     public RegisterPage  orderProduct(){
-        continueOrderButton.click();
         continueOrderButton.click();
         return new RegisterPage(eventDriver);
     }
+    //--------Click on Order Product button ------------------------------
 
 }

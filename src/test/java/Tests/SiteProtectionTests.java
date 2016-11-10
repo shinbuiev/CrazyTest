@@ -23,8 +23,8 @@ public class SiteProtectionTests extends BaseTest{
         getEventDriver().get("https://www.crazydomains.com.au/website-protection/");
     }
 
-    @Test(dataProviderClass = DataProviders.class,dataProvider = "provider")
-    public void successProductBuy(String os,int planNumber,String domainName){
+    @Test(dataProviderClass = DataProviders.class,dataProvider = "plan")
+    public void successProductBuy(int planNumber){
         BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber*0);
         orderPage.checkingTerm();
