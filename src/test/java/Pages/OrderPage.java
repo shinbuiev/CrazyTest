@@ -1,6 +1,7 @@
 package Pages;
 
 import DataProviders.DataProviders;
+import Listeners.EventHandler;
 import org.openqa.selenium.NoSuchElementException;
 
 import org.openqa.selenium.WebElement;
@@ -11,10 +12,11 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import java.util.ArrayList;
 import java.util.List;
 
+import static DataProviders.DataProviders.corrDomainGenerator;
 import static DataProviders.DataProviders.failedDomainNames;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotEquals;
-import static org.testng.Assert.assertTrue;
+import static Listeners.EventHandler.*;
+import static Listeners.EventHandler.LOG;
+import static org.testng.Assert.*;
 
 
 /**
@@ -37,7 +39,7 @@ public  class OrderPage extends BasePage {
     @FindBy(css = ".g-custom-radio>.product_element")
     private List<WebElement> inputsTermRadiobuttons;
     @CacheLookup
-    @FindBy(xpath = ".//*[@id='crazy_order_webbuilder_form']/div[1]/div[2]/div/div/div/span[2][@class='price-promo']")
+    @FindBy(xpath = ".//span[2][@class='price-promo']")
     private List<WebElement> termPromoCost;
     @CacheLookup
     @FindBy(css = "span.price-now:first-of-type")
@@ -70,7 +72,7 @@ public  class OrderPage extends BasePage {
     @FindBy(className = "button_continue_order")
     private WebElement continueOrderButton;
     @CacheLookup
-    @FindBy(className = "requiredField")
+    @FindBy(css = ".input>.requiredField")
     private WebElement errorField;
 
     public OrderPage(EventFiringWebDriver eventDriver) {
@@ -87,19 +89,20 @@ public  class OrderPage extends BasePage {
         int term = 0;
         double cost = 0;
         int expectedTotal = 0;
-        int actualtotal = 0;
+        int actualTotal = 0;
         while (count < termFields.size()) {
             termFields.get(count).click();
             assertTrue(inputsTermRadiobuttons.get(count).isSelected());
+            LOG.info("RadioButton \""+termDate.get(count).getText()+"\" month is checked");
             term = Integer.parseInt(termDate.get(count).getText());
             if (termPromoCost.get(count).getText().equals("")) {
-                cost = Double.parseDouble(termCost.get(count).getText().replace("$", "").replace("/mo", "").trim());
+            cost = Double.parseDouble(termCost.get(count).getText().replace("$", "").replace("/mo", "").trim());
             } else
-                cost = Double.parseDouble(termPromoCost.get(count).getText().replace("$", "").trim().replace("/mo", "").trim());
-
+            cost = Double.parseDouble(termPromoCost.get(count).getText().replace("$", "").trim().replace("/mo", "").trim());
             expectedTotal = (int) Math.round(term * cost);
-            actualtotal = Integer.parseInt(total.getText().trim().replace(".00", "").replace(",", ""));
-            assertEquals(actualtotal, expectedTotal, "Not equals");
+            actualTotal = Integer.parseInt(total.getText().trim().replace(".00", "").replace(",", ""));
+            assertEquals(actualTotal, expectedTotal, "Not equals");
+            LOG.info("Expected total : "+expectedTotal+"$ equals Actual total: "+actualTotal+"$");
             count++;
         }
     }
@@ -114,11 +117,13 @@ public  class OrderPage extends BasePage {
         own_new_domainRadiobutton.get(1).click();
     }
 
-    public void fillDomainNameField(String domainName){
+    public void fillCorrectDomainName(){
         try {
-            own_new_domainField.sendKeys(domainName);
+            own_new_domainField.clear();
+            own_new_domainField.sendKeys(corrDomainGenerator());
         }catch (NoSuchElementException e){
-            webSiteProtectionField.sendKeys(domainName);
+            webSiteProtectionField.clear();
+            webSiteProtectionField.sendKeys(corrDomainGenerator());
         }
     }
 
@@ -133,21 +138,23 @@ public  class OrderPage extends BasePage {
             webSiteProtectionField.sendKeys(failedDomainNames[x]);
             webSiteProtectionField.submit();
         }
-        assertTrue(isErrorUpear());
+        assertTrue(isErrorAppear());
     }
     }
 
-    public boolean isErrorUpear(){
+    public boolean isErrorAppear(){
         boolean appear=false;
         try {
             waitForElement(errorField);
             return appear=true;
         }catch (Exception e){
+           takeScreen(eventDriver,"Domain name validation error message not appear!");
            return appear=false;
         }
     }
 
     public RegisterPage  orderProduct(){
+        continueOrderButton.click();
         continueOrderButton.click();
         return new RegisterPage(eventDriver);
     }

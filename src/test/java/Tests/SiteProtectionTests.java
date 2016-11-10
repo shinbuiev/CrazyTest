@@ -28,7 +28,8 @@ public class SiteProtectionTests extends BaseTest{
         BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber*0);
         orderPage.checkingTerm();
-        orderPage.fillDomainNameField(domainName);
+        orderPage.fillFailedDomainName();
+        orderPage.fillCorrectDomainName();
         RegisterPage registerPage=orderPage.orderProduct();
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
         shoppingCartPage.emptyShoppingCart();

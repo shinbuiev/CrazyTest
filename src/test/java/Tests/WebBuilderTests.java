@@ -30,7 +30,8 @@ public class WebBuilderTests extends BaseTest {
         OrderPage orderPage=buyPage.buyPlan(planNumber*2);
         orderPage.checkingTerm();
         orderPage.chooseAddons();
-        orderPage.fillDomainNameField(domainName);
+        orderPage.fillFailedDomainName();
+        orderPage.fillCorrectDomainName();
         RegisterPage registerPage=orderPage.orderProduct();
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
         shoppingCartPage.emptyShoppingCart();

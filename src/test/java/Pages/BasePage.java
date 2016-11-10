@@ -1,5 +1,6 @@
 package Pages;
 
+import Tests.BaseTest;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
@@ -16,6 +17,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -41,17 +44,7 @@ public abstract class BasePage {
 
 
     public void waitForElement(WebElement element) {
-        new WebDriverWait(eventDriver,2).until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public boolean ifElementExist(WebElement element){
-        boolean exist=false;
-        try {
-            waitForElement(element);
-            return exist=true;
-        }catch (Exception e){
-            return exist=false;
-        }
+        new WebDriverWait(eventDriver,5).until(ExpectedConditions.visibilityOf(element));
     }
 
 
@@ -61,6 +54,19 @@ public abstract class BasePage {
         }catch (Exception e){
         }
     }
+
+
+    //---------Screenshot method----------------------------------------------------------------------------
+    public  static void takeScreen(EventFiringWebDriver recDriver,String eoorMess) {
+        try {
+            String date = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
+            File screenS = ((TakesScreenshot) (recDriver)).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(screenS, new File("C:\\Automation\\chromedriver\\Screen\\" + BaseTest.testName + "\\" + eoorMess +" "+ date + ".jpg"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+//---------Screenshot method-------------------------------------------------------------------------------
 
 
 

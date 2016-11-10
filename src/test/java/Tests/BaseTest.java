@@ -26,7 +26,7 @@ public abstract class BaseTest {
         capabilities.setCapability(CapabilityType.PAGE_LOADING_STRATEGY,"eagle");
         driver=new ChromeDriver(capabilities);
         eventDriver=new EventFiringWebDriver(driver);
-        eventDriver.register(new EventHandler("#FFFF00", 1, 300, TimeUnit.MILLISECONDS));
+        eventDriver.register(new EventHandler(eventDriver,"#FFFF00", 1, 300, TimeUnit.MILLISECONDS));
         eventDriver.manage().window().maximize();
     }
 
