@@ -1,21 +1,19 @@
 package Pages;
 
+import Tests.BaseTest;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import static Listeners.EventHandler.LOG;
 import java.io.File;
-import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -24,9 +22,6 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class BasePage {
     private EventFiringWebDriver eventDriver;
-
-
-
     //----Top menu -------------------------------------
 
 
@@ -37,11 +32,13 @@ public abstract class BasePage {
         PageFactory.initElements(eventDriver,this);
         this.eventDriver = eventDriver;
         eventDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        LOG.info("Go to page \""+eventDriver.getTitle().split("\\|")[0]+"\" with URL ("+eventDriver.getCurrentUrl()+")");
+
     }
 
 
     public void waitForElement(WebElement element) {
-        new WebDriverWait(eventDriver,5).until(ExpectedConditions.visibilityOf(element));
+        new WebDriverWait(eventDriver,4).until(ExpectedConditions.visibilityOf(element));
     }
 
     public void waitForElementIsClickable (WebElement element) {
@@ -63,6 +60,19 @@ public abstract class BasePage {
         }catch (Exception e){
         }
     }
+
+
+    //---------Screenshot method----------------------------------------------------------------------------
+    public  static void takeScreen(EventFiringWebDriver recDriver,String eoorMess) {
+        try {
+            String date = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
+            File screenS = recDriver.getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(screenS, new File("C:\\Automation\\chromedriver\\Screen\\" + BaseTest.testName + "\\" + eoorMess +"("+ date + ").jpg"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+//---------Screenshot method-------------------------------------------------------------------------------
 
 
 

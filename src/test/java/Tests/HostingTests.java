@@ -28,14 +28,15 @@ public class HostingTests extends BaseTest {
     }
 
     @Test(dataProviderClass = DataProviders.class,dataProvider = "provider")
-    public void successProductBuy(String os,int planNumber,String domainName){
+    public void successProductBuy(String os,int planNumber){
         BuyPage buyPage=new BuyPage(getEventDriver());
         buyPage.selectHostingOs(os);
         OrderPage orderPage=buyPage.buyPlan(planNumber);
-        orderPage.chooseTerm();
+        orderPage.checkingTerm();
         orderPage.chooseLinuxLocation();
         orderPage.chooseAddons();
-        orderPage.fillDomainNameField(domainName);
+        orderPage.fillFailedDomainName();
+        orderPage.fillCorrectDomainName();
         RegisterPage registerPage=orderPage.orderProduct();
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
         shoppingCartPage.emptyShoppingCart();

@@ -5,6 +5,8 @@ import Pages.BasePage;
 import Tests.BaseTest;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.LogManager;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -20,30 +22,35 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import static Pages.BasePage.takeScreen;
+
 /**
  * Created by Dmitriy.F on 03.11.2016.
  */
-public class EventHandler implements WebDriverEventListener {
-    private String path="";
-    private static final Logger LOG = LogManager.getLogger(EventHandler.class);
-    private WebElement element;
-    private WebDriver driver;
-    private String testName;
+public class EventHandler  implements WebDriverEventListener {
+    private EventFiringWebDriver eventDriver;
+
+    public static final Logger LOG = LogManager.getLogger(EventHandler.class);
     private static String errorMessage;
     private long interval;
     private final int count;
     private final String color;
 
-    public EventHandler(String color, int count, long interval, TimeUnit unit) {
+
+//----------Constructor -------------------------------------------------------------------------------
+    public EventHandler(EventFiringWebDriver eventDriver,String color, int count, long interval, TimeUnit unit) {
+        this.eventDriver=eventDriver;
         this.color = color;
         this.count = count;
         this.interval = TimeUnit.MILLISECONDS.convert(Math.max(0, interval), unit);
     }
+//----------Constructor --------------------------------------------------------------------------------
 
-
+//----------Light UP methods ---------------------------------------------------------------------------
     private void flash(WebElement element, WebDriver driver) {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
-        js.executeScript("scrollTo(0, " + (element.getLocation().getY()-driver.manage().window().getSize().getHeight()/3) + ")"); //Super scroll
+        js.executeScript("scrollTo(0, " + (element.getLocation()
+        .getY()-driver.manage().window().getSize().getHeight()/2) + ")"); //Super scroll
         String bgcolor = element.getCssValue("backgroundColor");
         for (int i = 0; i < count; i++) {
             changeColor(color, element, js);
@@ -59,13 +66,11 @@ public class EventHandler implements WebDriverEventListener {
             e.printStackTrace();
         }
     }
+//----------Light UP methods ---------------------------------------------------------------------------
 
-
-
+//----------Listeners ----------------------------------------------------------------------------------
     public void beforeNavigateTo(String s, WebDriver webDriver) {
-
-        LOG.info("Start running  "+ BaseTest.testName+ " and go to link- "+s);
-        driver=webDriver;
+        LOG.info("-----------------------------Start running  "+ BaseTest.testName+"------------------------------------");
     }
 
     public void afterNavigateTo(String s, WebDriver webDriver) {
@@ -101,8 +106,6 @@ public class EventHandler implements WebDriverEventListener {
     }
 
     public void afterFindBy(By by, WebElement webElement, WebDriver webDriver) {
-    path= String.valueOf(by);
-
     }
 
     public void beforeClickOn(WebElement webElement, WebDriver webDriver) {
@@ -110,17 +113,13 @@ public class EventHandler implements WebDriverEventListener {
     }
 
     public void afterClickOn(WebElement webElement, WebDriver webDriver) {
-    element=webElement;
     }
 
     public void beforeChangeValueOf(WebElement webElement, WebDriver webDriver) {
         flash(webElement, webDriver);
-        LOG.info("Start changing WebElement @FindBy(\""+path+"\")");
     }
 
     public void afterChangeValueOf(WebElement webElement, WebDriver webDriver) {
-        LOG.info("WebElement @FindBy(\""+path+"\") changed value to \'"+webElement.getAttribute("value")+"\'");
-
     }
 
     public void beforeScript(String s, WebDriver webDriver) {
@@ -131,20 +130,11 @@ public class EventHandler implements WebDriverEventListener {
 
     public void onException(Throwable throwable, WebDriver webDriver) {
         String []errorMessages=throwable.getMessage().split("\n");
-        errorMessage=errorMessages[0].replace("\":\"","=").replace("\"","").replace(":","-").replace("<","").replace(">","").trim();
+        errorMessage=errorMessages[0].replace("\":\"","=").replace("\"","").replace(":","-").replace("<","").replace(">","").replace("/","").trim();
         LOG.error(errorMessages[0].trim());
-        recordStep();
+        takeScreen(eventDriver,errorMessage);
     }
+//----------Listeners ----------------------------------------------------------------------------------
 
-//---------Screenshot method---------------------------------------------------------------------
-    public  void recordStep() {
-        try {
-            String date = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss ").format(new Date());
-            File screenS = ((TakesScreenshot) (driver)).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(screenS, new File("C:\\Automation\\chromedriver\\Screen\\" + BaseTest.testName + "\\" + errorMessage +" "+ date + ".jpg"));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-//---------Screenshot method---------------------------------------------------------------------
+
 }

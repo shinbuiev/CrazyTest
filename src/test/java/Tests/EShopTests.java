@@ -26,13 +26,14 @@ public class EShopTests extends BaseTest {
         getEventDriver().get("https://www.crazydomains.com.au/eshop-builder/");
     }
 
-    @Test(dataProviderClass = DataProviders.class,dataProvider = "provider")
-    public void successProductBuy(String os,int planNumber,String domainName){
+    @Test(dataProviderClass = DataProviders.class,dataProvider = "plans")
+    public void successProductBuy(int planNumber){
         BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber/2);
-        orderPage.chooseTerm();
+        orderPage.checkingTerm();
         orderPage.chooseAddons();
-        orderPage.fillDomainNameField(domainName);
+        orderPage.fillFailedDomainName();
+        orderPage.fillCorrectDomainName();
         RegisterPage registerPage=orderPage.orderProduct();
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
         shoppingCartPage.emptyShoppingCart();

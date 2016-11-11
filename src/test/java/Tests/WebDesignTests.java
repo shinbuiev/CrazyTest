@@ -27,25 +27,18 @@ public class WebDesignTests extends BaseTest {
     }
 
     @Test(dataProviderClass = DataProviders.class,dataProvider = "plans")
-    public void successProductBuy(int planNumber,String domainName){
+    public void successProductBuy(int planNumber){
         BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber);
-        orderPage.chooseTerm();
+        orderPage.checkingTerm();
         orderPage.chooseAddons();
-        orderPage.fillDomainNameField(domainName);
+        orderPage.fillFailedDomainName();
+        orderPage.fillCorrectDomainName();
         RegisterPage registerPage=orderPage.orderProduct();
         ShoppingCartPage shoppingCartPage=registerPage.goToShoppingCart();
         shoppingCartPage.emptyShoppingCart();
     }
 
-    @Test(dataProviderClass = DataProviders.class,dataProvider = "plans")
-    public void failedProductBuy(int planNumber){
-        BuyPage buyPage=new BuyPage(getEventDriver());
-        OrderPage orderPage=buyPage.buyPlan(planNumber);
-        orderPage.chooseTerm();
-        orderPage.chooseAddons();
-        orderPage.fillFailedDomainName();
-    }
 
 
     @AfterTest
