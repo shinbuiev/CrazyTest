@@ -22,12 +22,12 @@ public class DataProviders {
     @DataProvider(name = "provider")
     public static Object[][] Provider(){
         return new Object[][]{
-                {"",0},
-                {"",1},
-                {"",2},
-                {"switch",0},
-                {"switch",1},
-                {"switch",2}
+                {0,0},
+                {0,1},
+                {0,2},
+                {1,0},
+                {1,1},
+                {1,2}
         };
     }
 
@@ -37,18 +37,6 @@ public class DataProviders {
                 {0},
                 {1},
                 {2}
-        };
-    }
-
-    @DataProvider(name = "websitebuilderProvider")
-    public static Object[][] websitebuilderProvider(){
-        return new Object[][]{
-                {0, 1, 1, DataProviders.correctDomainNameGenerator()},
-                {1, 1, 2, DataProviders.correctDomainNameGenerator()},
-                {4, 2, 1,  DataProviders.correctDomainNameGenerator()},
-                {5, 2, 2, DataProviders.correctDomainNameGenerator()},
-                {8, 3, 1, DataProviders.correctDomainNameGenerator()},
-                {9, 3, 2, DataProviders.correctDomainNameGenerator()}
         };
     }
 

@@ -24,13 +24,9 @@ public abstract class BaseTest {
         testName=this.getClass().getName();
         System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver\\chromedriver.exe");
         driver=new ChromeDriver();
-
         eventDriver=new EventFiringWebDriver(driver);
-
-        eventDriver.manage().window().setSize(new Dimension(1080, 1520));
-        eventDriver.manage().window().setPosition(new Point(2560, -120));
-//        eventDriver.manage().window().maximize();
-        eventDriver.register(new EventHandler("#FFFF00", 1, 300, TimeUnit.MILLISECONDS));
+        eventDriver.manage().window().maximize();
+        eventDriver.register(new EventHandler(eventDriver,"#FFFF00", 1, 50, TimeUnit.MILLISECONDS));
     }
 
     public WebDriver getDriver() {

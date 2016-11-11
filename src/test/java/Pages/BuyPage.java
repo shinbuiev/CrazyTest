@@ -46,42 +46,38 @@ public  class BuyPage extends BasePage {
     public BuyPage(EventFiringWebDriver eventDriver) {
         super(eventDriver);
         this.eventDriver = eventDriver;
-        moreButton.click();
     }
 
     public OrderPage buyPlan(int plan) {
-        LOG.info("Start buying \""+productTitlePP.get(plan).getText()+"\" plan");
-        try{
-            buyPlanButton.get(plan).click();
-        }catch (Exception e){
-            buyPlanButton.get(plan+1).click();
-        }
+        LOG.info("Start buying \"" + productTitlePP.get(plan)
+                .getText() + " " + planSpecification.get(plan).getText().replace("\n", " ") + "\" plan");
+        buyPlanButton.get(plan).click();
         return new OrderPage(eventDriver);
     }
 
-    //---------Web HOSTING SECTION-----------------------------
-    public void selectHostingOs(String osName) {
-       if (osName.equals("switch")) {
-           LOG.info("Switch to Windows Hosting");
-           windowsButton.click();
-       }
-    }
-    //---------Web HOSTING SECTION-----------------------------
-
-
-    //---------Web BUILDER SECTION-----------------------------
-    public void selectBuilder(String sw, int plan) {
-        if (sw.equals("windows")) {
-            webSiteBuilderDropdown.get(plan / 2).click();
-            webSiteBuilderOption.get(1).click();
-            LOG.info("Switch to \""+planSpecification.get(plan/4).getText()+"\"");
+    //---------SWITCHER SECTION-----------------------------
+    public void swithButton(int switchToAnother, int plan) {
+        String curURL = eventDriver.getCurrentUrl();
+        if (switchToAnother == 1) {
+            if (curURL.contains("web-hosting")) {
+                windowsButton.click();
+                LOG.info("Switch to Windows Hosting");
+            } else if (curURL.contains("web-builder")) {
+                {
+                    webSiteBuilderDropdown.get(plan).click();
+                    webSiteBuilderOption.get(1).click();
+                    LOG.info("Switch to \"" + planSpecification.get(plan / 4).getText() + "\"");
+                }
+            }
         }
-
     }
-    public void selectPagesNumber (int planNumber, int pagesNumber) {
-        webSiteBuilderDropdown.get(planNumber-1).click();
-        webSiteBuilderOption.get(pagesNumber-1).click();
-
-    }
-    //---------Web BUILDER SECTION-----------------------------
 }
+    //---------SWITCHER SECTION-----------------------------
+
+
+
+
+
+
+
+

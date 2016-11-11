@@ -24,9 +24,9 @@ public class WebBuilderTests extends BaseTest {
     }
 
     @Test(dataProviderClass = DataProviders.class,dataProvider = "provider")
-    public void successProductBuy(String drop,int planNumber){
+    public void successProductBuy(int switcher,int planNumber){
         BuyPage buyPage=new BuyPage(getEventDriver());
-        buyPage.selectBuilder(drop,planNumber);
+        buyPage.swithButton(switcher,planNumber*2);
         OrderPage orderPage=buyPage.buyPlan(planNumber);
         orderPage.checkingTerm();
         orderPage.chooseAddons();

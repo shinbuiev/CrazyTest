@@ -28,9 +28,9 @@ public class HostingTests extends BaseTest {
     }
 
     @Test(dataProviderClass = DataProviders.class,dataProvider = "provider")
-    public void successProductBuy(String os,int planNumber){
+    public void successProductBuy(int switcher,int planNumber){
         BuyPage buyPage=new BuyPage(getEventDriver());
-        buyPage.selectHostingOs(os);
+        buyPage.swithButton(switcher,planNumber);
         OrderPage orderPage=buyPage.buyPlan(planNumber);
         orderPage.checkingTerm();
         orderPage.chooseLinuxLocation();
