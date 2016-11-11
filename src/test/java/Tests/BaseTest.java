@@ -30,7 +30,7 @@ public abstract class BaseTest {
         eventDriver.manage().window().setSize(new Dimension(1080, 1520));
         eventDriver.manage().window().setPosition(new Point(2560, -120));
 //        eventDriver.manage().window().maximize();
-        eventDriver.register(new EventHandler("#FFFF00", 1, 300, TimeUnit.MILLISECONDS));
+        eventDriver.register(new EventHandler(eventDriver,"#FFFF00", 1, 300, TimeUnit.MILLISECONDS));
     }
 
     public WebDriver getDriver() {

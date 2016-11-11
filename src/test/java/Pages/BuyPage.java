@@ -55,7 +55,7 @@ public  class BuyPage extends BasePage {
             buyPlanButton.get(plan).click();
         }catch (Exception e){
             LOG.info("Start buying \""+productTitlePP.get(plan/4).getText()+"\" plan");
-            buyPlanButton.get(plan+1).click();
+            buyPlanButton.get(plan).click();
         }
         return new OrderPage(eventDriver);
     }

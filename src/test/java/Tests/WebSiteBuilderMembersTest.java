@@ -2,6 +2,7 @@ package Tests;
 
 import DataProviders.DataProviders;
 import Pages.BuyPage;
+import Pages.LoginPage;
 import Pages.OrderPage;
 import Pages.ShoppingCartPage;
 import org.openqa.selenium.By;
@@ -22,14 +23,14 @@ public class WebSiteBuilderMembersTest extends BaseTest{
     @BeforeTest
     public void start(){
         initial();
-//        LoginPage lp = new LoginPage(getEventDriver());// open Login page
-//        lp.login2members("buster28", "Herpar8l");
+        LoginPage lp = new LoginPage(getEventDriver());// open Login page
+        lp.login2members("buster28", "Herpar8l");
     }
 
     @BeforeMethod
     public void getPage(){
-//        getEventDriver().get("https://manage.crazydomains.com.au/members/web-builder/order/");
-        getEventDriver().get("https://www.crazydomains.com.au/web-builder/");
+        getEventDriver().get("https://manage.crazydomains.com.au/members/web-builder/order/");
+//        getEventDriver().get("https://www.crazydomains.com.au/web-builder/");
 
     }
 
@@ -38,9 +39,10 @@ public class WebSiteBuilderMembersTest extends BaseTest{
         BuyPage buyPage = new BuyPage(getEventDriver());
         buyPage.selectPagesNumber(planNumber, pagesNumber);
         OrderPage orderPage = buyPage.buyPlan(buyNowButton);
-        orderPage.chooseTerm();
+        orderPage.checkingTerm();
         orderPage.chooseAddons();
-        orderPage.fillDomainNameField(domainName);
+        orderPage.fillFailedDomainName();
+        orderPage.fillCorrectDomainName();
         orderPage.orderProduct();
         ShoppingCartPage shopCart = new ShoppingCartPage(getEventDriver());
         shopCart.emptyShoppingCart();

@@ -111,7 +111,9 @@ public  class OrderPage extends BasePage {
             assertTrue(inputsTermRadiobuttons.get(count).isSelected());
             LOG.info("RadioButton \""+termDate.get(count).getText()+" month\" is checked");
             term = Integer.parseInt(termDate.get(count).getText());
-            if (termPromoCost.get(count).getText().equals("")) {
+//********************************************************************************************************
+                   // ILLIA TODO
+          if (termPromoCost.get(count).getText().equals("")) {
             cost = Double.parseDouble(termCost.get(count).getText().replace("$", "").replace("/mo", "").trim());
             } else
             cost = Double.parseDouble(termPromoCost.get(count).getText().replace("$", "").trim().replace("/mo", "").trim());
@@ -121,6 +123,8 @@ public  class OrderPage extends BasePage {
             takeScreen(eventDriver,"Total not equals at Plan options "+term+" month");
             }
             assertEquals(actualTotal, expectedTotal);
+
+ //********************************************************************************************************
             count++;
         }
     }

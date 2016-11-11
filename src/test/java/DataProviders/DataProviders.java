@@ -7,8 +7,7 @@ import org.testng.annotations.DataProvider;
  */
 public class DataProviders {
 
-    public static String[] failedDomainNames={"папамама.ру","@!#%$^^*&(.com",
-    "\">","","     ","f"};
+    public static String[] failedDomainNames={"папамама.ру","@!#%$^^*&(.com","\">","","     ","f"};
 
 
     public static String corrDomainGenerator(){
@@ -43,12 +42,12 @@ public class DataProviders {
     @DataProvider(name = "websitebuilderProvider")
     public static Object[][] websitebuilderProvider(){
         return new Object[][]{
-                {0, 1, 1, DataProviders.correctDomainNameGenerator()},
-                {1, 1, 2, DataProviders.correctDomainNameGenerator()},
-                {4, 2, 1,  DataProviders.correctDomainNameGenerator()},
-                {5, 2, 2, DataProviders.correctDomainNameGenerator()},
-                {8, 3, 1, DataProviders.correctDomainNameGenerator()},
-                {9, 3, 2, DataProviders.correctDomainNameGenerator()}
+                {0, 1, 1, DataProviders.corrDomainGenerator()},
+                {1, 1, 2, DataProviders.corrDomainGenerator()},
+                {4, 2, 1,  DataProviders.corrDomainGenerator()},
+                {5, 2, 2, DataProviders.corrDomainGenerator()},
+                {8, 3, 1, DataProviders.corrDomainGenerator()},
+                {9, 3, 2, DataProviders.corrDomainGenerator()}
         };
     }
 
