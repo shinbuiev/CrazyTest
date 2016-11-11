@@ -2,7 +2,6 @@ package Tests;
 
 import DataProviders.DataProviders;
 import Pages.BuyPage;
-import Pages.LoginPage;
 import Pages.OrderPage;
 import Pages.ShoppingCartPage;
 import org.openqa.selenium.By;
