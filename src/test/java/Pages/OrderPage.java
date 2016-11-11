@@ -137,6 +137,7 @@ public  class OrderPage extends BasePage {
             assertTrue(addonsCheckboxes.get(count).isSelected());
             LOG.info("Addon \""+addonsDescription.get(count).getText()+"\" is checked and add to the product");
             count++;
+
         }
 
     }
