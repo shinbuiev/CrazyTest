@@ -15,7 +15,7 @@ public  class BuyPage extends BasePage {
     private EventFiringWebDriver eventDriver;
 
     @CacheLookup
-    @FindBy(className = "withLoading")
+    @FindBy(xpath = ".//*[@id='moving_object_container']/div/div/main/div/.//a")
     private List<WebElement> buyPlanButton;
     @CacheLookup
     @FindBy(className = "linux")
@@ -49,26 +49,21 @@ public  class BuyPage extends BasePage {
     }
 
     public OrderPage buyPlan(int plan) {
+        LOG.info("Start buying \""+productTitlePP.get(plan).getText()+"\" plan");
         try{
-                LOG.info("Start buying \"" + productTitlePP.get(plan / 2).getText() + "\" plan");
             buyPlanButton.get(plan).click();
         }catch (Exception e){
-            LOG.info("Start buying \""+productTitlePP.get(plan/4).getText()+"\" plan");
             buyPlanButton.get(plan+1).click();
         }
         return new OrderPage(eventDriver);
     }
 
     //---------Web HOSTING SECTION-----------------------------
-    public BuyPage selectHostingOs(String osName) {
-        if (osName.equals("linux")) {
-            linuxButton.click();
-            LOG.info("Switch to Linux Hosting");
-        } else if (osName.equals("windows")) {
-            LOG.info("Switch to Windows Hosting");
-            windowsButton.click();
-        }
-        return this;
+    public void selectHostingOs(String osName) {
+       if (osName.equals("switch")) {
+           LOG.info("Switch to Windows Hosting");
+           windowsButton.click();
+       }
     }
     //---------Web HOSTING SECTION-----------------------------
 

@@ -22,12 +22,12 @@ public class DataProviders {
     @DataProvider(name = "provider")
     public static Object[][] Provider(){
         return new Object[][]{
-                {"linux",0},
-                {"linux",2},
-                {"linux",4},
-                {"windows",0},
-                {"windows",2},
-                {"windows",4}
+                {"",0},
+                {"",1},
+                {"",2},
+                {"switch",0},
+                {"switch",1},
+                {"switch",2}
         };
     }
 
@@ -35,8 +35,8 @@ public class DataProviders {
     public static Object[][] plans(){
         return new Object[][]{
                 {0},
-                {2},
-                {4}
+                {1},
+                {2}
         };
     }
 

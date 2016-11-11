@@ -27,7 +27,7 @@ public class WebBuilderTests extends BaseTest {
     public void successProductBuy(String drop,int planNumber){
         BuyPage buyPage=new BuyPage(getEventDriver());
         buyPage.selectBuilder(drop,planNumber);
-        OrderPage orderPage=buyPage.buyPlan(planNumber*2);
+        OrderPage orderPage=buyPage.buyPlan(planNumber);
         orderPage.checkingTerm();
         orderPage.chooseAddons();
         orderPage.fillFailedDomainName();
