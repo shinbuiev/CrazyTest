@@ -54,7 +54,7 @@ public  class OrderPage extends BasePage {
     @FindBy(css = ".g-custom-checkbox>.product_element")
     private List<WebElement>addonsCheckboxes;
     @CacheLookup
-    @FindBy(xpath = ".//*[@id='crazy_order_webbuilder_form']/div[2]/div[2]/div")
+    @FindBy(xpath = ".//div[@class='g-order-table _green-plan row _zero-space']/div[2]/div[@class='row table-row order_table_row_js']")
     private List<WebElement>addonsFields;
     @CacheLookup
     @FindBy(css = ".bold.item-name")
@@ -135,7 +135,7 @@ public  class OrderPage extends BasePage {
                 takeScreen(eventDriver,"Addon \""+addonsDescription.get(count).getText()+"\" not add to the product");
             }
             assertTrue(addonsCheckboxes.get(count).isSelected());
-            LOG.info("Addon \""+addonsDescription.get(count).getText()+"\" add to the product");
+            LOG.info("Addon \""+addonsDescription.get(count).getText()+"\" is checked and add to the product");
             count++;
         }
 

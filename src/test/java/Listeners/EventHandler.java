@@ -70,7 +70,7 @@ public class EventHandler  implements WebDriverEventListener {
 
 //----------Listeners ----------------------------------------------------------------------------------
     public void beforeNavigateTo(String s, WebDriver webDriver) {
-        LOG.info("Start running  "+ BaseTest.testName+ " and go to link- "+s);
+        LOG.info("Start running  "+ BaseTest.testName);
     }
 
     public void afterNavigateTo(String s, WebDriver webDriver) {

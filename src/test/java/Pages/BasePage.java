@@ -2,21 +2,14 @@ package Pages;
 
 import Tests.BaseTest;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import static Listeners.EventHandler.LOG;
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +22,6 @@ public abstract class BasePage {
     private EventFiringWebDriver eventDriver;
 
 
-
     //----Top menu -------------------------------------
 
 
@@ -40,6 +32,8 @@ public abstract class BasePage {
         PageFactory.initElements(eventDriver,this);
         this.eventDriver = eventDriver;
         eventDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        LOG.info("Go to page \""+eventDriver.getTitle()+"\" with URL ("+eventDriver.getCurrentUrl()+")");
+
     }
 
 
