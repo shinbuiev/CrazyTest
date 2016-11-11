@@ -42,7 +42,7 @@ public class WebSiteBuilderMembersTest extends BaseTest{
         orderPage.chooseAddons();
         orderPage.fillDomainNameField(domainName);
         orderPage.orderProduct();
-        ShoppingCartPage shopCart = new ShoppingCartPage(getEventDriver()); 
+        ShoppingCartPage shopCart = new ShoppingCartPage(getEventDriver());
         shopCart.emptyShoppingCart();
     }
 
