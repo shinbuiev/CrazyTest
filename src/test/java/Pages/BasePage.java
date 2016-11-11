@@ -4,6 +4,8 @@ import Tests.BaseTest;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,8 +22,6 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class BasePage {
     private EventFiringWebDriver eventDriver;
-
-
     //----Top menu -------------------------------------
 
 
@@ -32,7 +32,7 @@ public abstract class BasePage {
         PageFactory.initElements(eventDriver,this);
         this.eventDriver = eventDriver;
         eventDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-        LOG.info("Go to page \""+eventDriver.getTitle()+"\" with URL ("+eventDriver.getCurrentUrl()+")");
+        LOG.info("Go to page \""+eventDriver.getTitle().split("\\|")[0]+"\" with URL ("+eventDriver.getCurrentUrl()+")");
 
     }
 

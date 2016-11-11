@@ -54,7 +54,7 @@ public  class OrderPage extends BasePage {
     @FindBy(css = ".g-custom-checkbox>.product_element")
     private List<WebElement>addonsCheckboxes;
     @CacheLookup
-    @FindBy(xpath = ".//div[@class='g-order-table _green-plan row _zero-space']/div[2]/div[@class='row table-row order_table_row_js']")
+    @FindBy(xpath = ".//div/div[@class='_hover col-xl-20 col-l-24']/div[@class='row table-row order_table_row_js']")
     private List<WebElement>addonsFields;
     @CacheLookup
     @FindBy(css = ".bold.item-name")
