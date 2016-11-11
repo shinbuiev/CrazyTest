@@ -1,5 +1,6 @@
 package Pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -29,6 +30,15 @@ public class ShoppingCartPage extends BasePage {
     @CacheLookup
     @FindBy(id = "cart_control")
     private WebElement cartControl;
+    @FindBy(name = "Submit")
+    private WebElement checkoutButtonMembers;
+    @FindBy (xpath = ".//*[@id='shopping_cart_table']/div/div[2]/a")//as is, normal id for this
+    private WebElement startAgain;
+    @FindBy (id = "cart_control")
+    private WebElement upCart;
+    @FindBy (className = "crazyPopUp_container")
+    private WebElement popupEmpty;
+
 
 
 
@@ -36,18 +46,21 @@ public class ShoppingCartPage extends BasePage {
     public ShoppingCartPage(EventFiringWebDriver eventDriver) {
         super(eventDriver);
         this.eventDriver=eventDriver;
-        waitForElement(checkoutButton);
+        if (eventDriver.getCurrentUrl().contains("members")){
+            eventDriver.get("https://manage.crazydomains.com.au/members/shopping-cart/");
+            waitForElement(checkoutButtonMembers);
+        }
+        else
+            waitForElement(checkoutButton);
     }
 
     public void emptyShoppingCart(){
-        buttonEmptyCart.click();
-        waitForElement(cartResetButton);
-        cartResetButton.click();
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if (buttonEmptyCart.isDisplayed()) {
+            buttonEmptyCart.click();
+            waitForElement(cartResetButton);
+            cartResetButton.click();
+            waitForElementIsInvisible(eventDriver.findElement(By.className("crazyPopUp_container")));// with using @FindBy get error(
+            waitForElementIsClickable(upCart);
         }
     }
 }

@@ -20,11 +20,16 @@ public class RegisterPage extends BasePage {
     @CacheLookup
     @FindBy(className = "step-title")
     private List<WebElement> orderStepLine;
+    @FindBy (name = "Submit")
+    private WebElement payAndActive;
 
     public RegisterPage(EventFiringWebDriver eventDriver) {
         super(eventDriver);
         this.eventDriver=eventDriver;
-        waitForElement(registrationLoginButton);
+        if (eventDriver.getCurrentUrl().contains("members"))
+            waitForElement(payAndActive);
+        else
+            waitForElement(registrationLoginButton);
     }
 
     public ShoppingCartPage goToShoppingCart(){

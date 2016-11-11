@@ -40,4 +40,16 @@ public class DataProviders {
         };
     }
 
+    @DataProvider(name = "websitebuilderProvider")
+    public static Object[][] websitebuilderProvider(){
+        return new Object[][]{
+                {0, 1, 1, DataProviders.correctDomainNameGenerator()},
+                {1, 1, 2, DataProviders.correctDomainNameGenerator()},
+                {4, 2, 1,  DataProviders.correctDomainNameGenerator()},
+                {5, 2, 2, DataProviders.correctDomainNameGenerator()},
+                {8, 3, 1, DataProviders.correctDomainNameGenerator()},
+                {9, 3, 2, DataProviders.correctDomainNameGenerator()}
+        };
+    }
+
 }
