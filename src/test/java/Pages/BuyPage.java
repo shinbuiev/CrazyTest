@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import static Listeners.EventHandler.LOG;
 
 import java.util.List;
 
@@ -34,6 +35,9 @@ public  class BuyPage extends BasePage {
     @CacheLookup
     @FindBy(className = "selectWrap")
     private List<WebElement> webSiteBuilderDropdown;
+    @CacheLookup
+    @FindBy(css = ".plan-header>.col-title:first-child")
+    private List<WebElement> productTitlePP;
 
 
     public BuyPage(EventFiringWebDriver eventDriver) {
@@ -42,6 +46,7 @@ public  class BuyPage extends BasePage {
     }
 
     public OrderPage buyPlan(int plan) {
+        LOG.info("Start buying \""+productTitlePP.get(plan/2).getText()+"\" plan");
         try{
             buyPlanButton.get(plan).click();
         }catch (Exception e){
