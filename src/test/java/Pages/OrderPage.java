@@ -118,6 +118,7 @@ public  class OrderPage extends BasePage {
             LOG.error("Actual total \""+actualTotal+"\" not equals \""+expectedTotal+"\"  Expected total ");
             takeScreen(eventDriver,"Total not equals at Plan options "+term+" month");
             }
+            assertEquals(expectedTotal,actualTotal);
             count++;
         }
     }
