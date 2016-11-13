@@ -8,6 +8,8 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.util.List;
 
+import static Listeners.EventHandler.LOG;
+
 /**
  * Created by Dmitriy.F on 02.11.2016.
  */
@@ -30,6 +32,7 @@ public class RegisterPage extends BasePage {
     }
 
     public ShoppingCartPage goToShoppingCart(){
+        LOG.info("Click to \"Shopping cart\" step line");
         orderStepLine.get(0).click();
         return new ShoppingCartPage(eventDriver);
     }

@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static Listeners.EventHandler.LOG;
+
 /**
  * Created by Dmitriy.F on 02.11.2016.
  */
@@ -37,10 +39,10 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public void emptyShoppingCart(){
+        LOG.info("Ebpty \"Shopping cart\"");
         buttonEmptyCart.click();
         waitForElement(cartResetButton);
         cartResetButton.click();
-
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {

@@ -63,11 +63,10 @@ public  class BuyPage extends BasePage {
                 windowsButton.click();
                 LOG.info("Switch to Windows Hosting");
             } else if (curURL.contains("web-builder")) {
-                {
                     webSiteBuilderDropdown.get(plan).click();
                     webSiteBuilderOption.get(1).click();
                     LOG.info("Switch to \"" + planSpecification.get(plan / 4).getText() + "\"");
-                }
+                
             }
         }
     }

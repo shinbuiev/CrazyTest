@@ -134,7 +134,6 @@ public  class OrderPage extends BasePage {
             assertTrue(addonsCheckboxes.get(count).isSelected());
             LOG.info("Addon \""+addonsDescription.get(count).getText()+"\" is checked and add to the product");
             count++;
-
         }
 
     }
@@ -153,7 +152,6 @@ public  class OrderPage extends BasePage {
             domainField.sendKeys(corrDomainGenerator());
             LOG.info("Fill Domain name field for \"" + domainField.getAttribute("value") + "\"");
             total.click();
-            assertFalse(isErrorAppear());
         }
 
 
@@ -164,7 +162,6 @@ public  class OrderPage extends BasePage {
             domainField.sendKeys(failedDomainNames[x]);
             domainField.submit();
             LOG.info("Fill failed Domain name field for \"" + failedDomainNames[x] + "\"");
-
             assertTrue(isErrorAppear());
         }
     }
