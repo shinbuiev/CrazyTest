@@ -15,7 +15,7 @@ public  class BuyPage extends BasePage {
     private EventFiringWebDriver eventDriver;
 
     @CacheLookup
-    @FindBy(xpath = ".//*[@id='moving_object_container']/div/div/main/div/.//a")
+    @FindBy(xpath = ".//*[@id='moving_object_container']/div/div/main/div/.//a[1]")
     private List<WebElement> buyPlanButton;
     @CacheLookup
     @FindBy(className = "linux")
