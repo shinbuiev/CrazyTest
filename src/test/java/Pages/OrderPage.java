@@ -63,11 +63,8 @@ public  class OrderPage extends BasePage {
     @FindBy(xpath = ".//*[@id='connect_to']/div[2]/div/div[2]/div[1]/div/div")
     private List<WebElement>own_new_domainRadiobutton;
     @CacheLookup
-    @FindBy(id = "search_domain_input")
-    private WebElement own_new_domainField;
-    @CacheLookup
-    @FindBy(className = "website_protection_domain")
-    private WebElement webSiteProtectionField;
+    @FindBy(css = ".input>input")
+    private WebElement domainField;
     @CacheLookup
     @FindBy(css = "span#total")
     private WebElement total;
@@ -144,37 +141,34 @@ public  class OrderPage extends BasePage {
     //--------Check all Addons  ------------------------------
 
     //--------Choose New/Own Domain  ------------------------------
-    public void chooseNewDomain(){
-        own_new_domainRadiobutton.get(1).click();
+    public void chooseNewOrOwnDomain(int switcher){
+        LOG.info("Switching for New or Own Domain");
+        own_new_domainRadiobutton.get(switcher).click();
     }
     //--------Choose New/Own Domain  ------------------------------
 
 
-    public void fillCorrectDomainName(){
-        try {
-            own_new_domainField.clear();
-            own_new_domainField.sendKeys(corrDomainGenerator());
-        }catch (NoSuchElementException e){
-            webSiteProtectionField.clear();
-            webSiteProtectionField.sendKeys(corrDomainGenerator());
+    public void fillCorrectDomainName() {
+            domainField.clear();
+            domainField.sendKeys(corrDomainGenerator());
+            LOG.info("Fill Domain name field for \"" + domainField.getAttribute("value") + "\"");
+            total.click();
+            assertFalse(isErrorAppear());
         }
-        total.click();
-    }
+
+
     //--------Fill Domain name fields with failed names ------------------------------
-    public void fillFailedDomainName(){
-    for(int x=0;x<failedDomainNames.length;x++){
-        try {
-            own_new_domainField.clear();
-            own_new_domainField.sendKeys(failedDomainNames[x]);
-            own_new_domainField.submit();
-        }catch (NoSuchElementException e){
-            webSiteProtectionField.clear();
-            webSiteProtectionField.sendKeys(failedDomainNames[x]);
-            webSiteProtectionField.submit();
+    public void fillFailedDomainName() {
+        for (int x = 0; x < failedDomainNames.length; x++) {
+            domainField.clear();
+            domainField.sendKeys(failedDomainNames[x]);
+            domainField.submit();
+            LOG.info("Fill failed Domain name field for \"" + failedDomainNames[x] + "\"");
+
+            assertTrue(isErrorAppear());
         }
-        assertTrue(isErrorAppear());
     }
-    }
+
     //--------Fill Domain name fields with failed names ------------------------------
 
     //--------Check is error message at Domain name field appear ------------------------------
@@ -195,6 +189,7 @@ public  class OrderPage extends BasePage {
     //--------Click on Order Product button ------------------------------
     public RegisterPage  orderProduct(){
         continueOrderButton.click();
+        LOG.info("Click \"Continue Oder\" button");
         return new RegisterPage(eventDriver);
     }
     //--------Click on Order Product button ------------------------------

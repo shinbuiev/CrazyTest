@@ -56,7 +56,7 @@ public  class BuyPage extends BasePage {
     }
 
     //---------SWITCHER SECTION-----------------------------
-    public void swithButton(int switchToAnother, int plan) {
+    public void switchButton(int switchToAnother, int plan) {
         String curURL = eventDriver.getCurrentUrl();
         if (switchToAnother == 1) {
             if (curURL.contains("web-hosting")) {

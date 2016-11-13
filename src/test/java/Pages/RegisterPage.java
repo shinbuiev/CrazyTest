@@ -26,10 +26,7 @@ public class RegisterPage extends BasePage {
     public RegisterPage(EventFiringWebDriver eventDriver) {
         super(eventDriver);
         this.eventDriver=eventDriver;
-        if (eventDriver.getCurrentUrl().contains("members"))
-            waitForElement(payAndActive);
-        else
-            waitForElement(registrationLoginButton);
+        waitForElement(registrationLoginButton);
     }
 
     public ShoppingCartPage goToShoppingCart(){

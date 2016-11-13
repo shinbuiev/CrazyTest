@@ -30,11 +30,12 @@ public class HostingTests extends BaseTest {
     @Test(dataProviderClass = DataProviders.class,dataProvider = "provider")
     public void successProductBuy(int switcher,int planNumber){
         BuyPage buyPage=new BuyPage(getEventDriver());
-        buyPage.swithButton(switcher,planNumber);
+        buyPage.switchButton(switcher,planNumber);
         OrderPage orderPage=buyPage.buyPlan(planNumber);
         orderPage.checkingTerm();
         orderPage.chooseLinuxLocation();
         orderPage.chooseAddons();
+        orderPage.chooseNewOrOwnDomain(switcher);
         orderPage.fillFailedDomainName();
         orderPage.fillCorrectDomainName();
         RegisterPage registerPage=orderPage.orderProduct();
