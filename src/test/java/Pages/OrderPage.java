@@ -115,9 +115,9 @@ public  class OrderPage extends BasePage {
             expectedTotal = (int) Math.round(term * cost);
             actualTotal = Integer.parseInt(total.getText().trim().replace(".00", "").replace(",", ""));
             if (actualTotal!=expectedTotal){
+            LOG.error("Actual total \""+actualTotal+"\" not equals \""+expectedTotal+"\"  Expected total ");
             takeScreen(eventDriver,"Total not equals at Plan options "+term+" month");
             }
-            assertEquals(actualTotal, expectedTotal);
             count++;
         }
     }

@@ -35,7 +35,6 @@ public class HostingTests extends BaseTest {
         orderPage.checkingTerm();
         orderPage.chooseLinuxLocation();
         orderPage.chooseAddons();
-        orderPage.chooseNewOrOwnDomain(switcher);
         orderPage.fillFailedDomainName();
         orderPage.fillCorrectDomainName();
         RegisterPage registerPage=orderPage.orderProduct();
