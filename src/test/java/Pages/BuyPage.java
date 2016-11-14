@@ -15,7 +15,7 @@ public  class BuyPage extends BasePage {
     private EventFiringWebDriver eventDriver;
 
     @CacheLookup
-    @FindBy(xpath = ".//*[@id='moving_object_container']/div/div/main/div/.//a[1]")
+    @FindBy(xpath = ".//div/div/main/div/.//a[1]")
     private List<WebElement> buyPlanButton;
     @CacheLookup
     @FindBy(xpath = ".//*[@id='moving_object_container']/div/div/main/div/.//a[2]")
@@ -42,7 +42,7 @@ public  class BuyPage extends BasePage {
     @FindBy(css = ".plan-header>.col-title:first-child")
     private List<WebElement> productTitlePP;
     @CacheLookup
-    @FindBy(xpath = ".//*[@id='moving_object_container']/div/div/div/ul[1]/li[1]")
+    @FindBy(xpath = ".//div/div/div/ul[1]/li[1]")
     private List<WebElement> planSpecification;
 
 

@@ -29,7 +29,7 @@ public class EShopTests extends BaseTest {
     @Test(dataProviderClass = DataProviders.class,dataProvider = "plans")
     public void successProductBuy(int planNumber){
         BuyPage buyPage=new BuyPage(getEventDriver());
-        OrderPage orderPage=buyPage.buyPlan(planNumber/2);
+        OrderPage orderPage=buyPage.buyPlan(planNumber);
         orderPage.checkingTerm();
         orderPage.chooseAddons();
         orderPage.fillFailedDomainName();
