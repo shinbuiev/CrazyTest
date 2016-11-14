@@ -67,7 +67,6 @@ public abstract class BasePage {
             list[i]=list[i].replace(".java","");
         }
         for (int i = 0; i < list.length; i++) {
-            System.out.println(list[i]);
             if (strUrl.contains(list[i].toLowerCase().trim())) {
                 Class c = Class.forName("Products."+list[i]);
                 obj = c.newInstance();

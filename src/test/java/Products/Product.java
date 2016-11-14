@@ -3,8 +3,11 @@ package Products;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+
+import static Tests.BaseTest.eventDriver;
 
 /**
  * Created by Dmitriy.F on 02.11.2016.
@@ -20,6 +23,10 @@ public abstract class Product {
     @CacheLookup
     @FindBy(css = ".plan-spec-square")
     private WebElement planSpec;
+
+    Product(){
+        PageFactory.initElements(eventDriver,this);
+    }
 
     public boolean getName(String[]names) {
         boolean planEqual=false;
