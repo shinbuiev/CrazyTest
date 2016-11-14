@@ -49,6 +49,7 @@ public  class BuyPage extends BasePage {
     public BuyPage(EventFiringWebDriver eventDriver) {
         super(eventDriver);
         this.eventDriver = eventDriver;
+
     }
 
     public OrderPage buyPlan(int plan) {
