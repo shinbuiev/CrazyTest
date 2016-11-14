@@ -4,8 +4,6 @@ import Tests.BaseTest;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -38,7 +36,7 @@ public abstract class BasePage {
 
 
     public void waitForElement(WebElement element) {
-        new WebDriverWait(eventDriver,4).until(ExpectedConditions.visibilityOf(element));
+        new WebDriverWait(eventDriver,10).until(ExpectedConditions.visibilityOf(element));
     }
 
 
