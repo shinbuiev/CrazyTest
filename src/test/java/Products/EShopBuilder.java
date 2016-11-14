@@ -9,7 +9,7 @@ import static org.testng.Assert.assertTrue;
  */
 public class EShopBuilder extends Product {
 
-    private final String[] eshopNames={"eShop","eShop Plus","eShop Pro"};
+    private final String[] eshopNames={"eShop","eShop PLUS","eShop PRO"};
     private final String[] eshopAddons={"Traffic Booster","Premium Email Protection"};
     private final int[] eshopTerms={12,24,48,84};
 
