@@ -28,7 +28,7 @@ public class EmailMarketingTests extends BaseTest{
     }
 
     @Test(dataProviderClass = DataProviders.class,dataProvider = "plans")
-    public void successProductBuy(int planNumber){
+    public void successProductBuy(int planNumber) throws IllegalAccessException, ClassNotFoundException, InstantiationException {
         BuyPage buyPage=new BuyPage(getEventDriver());
         OrderPage orderPage=buyPage.buyPlan(planNumber);
         orderPage.checkingTerm();

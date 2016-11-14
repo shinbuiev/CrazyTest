@@ -2,6 +2,8 @@ package Pages;
 
 import DataProviders.DataProviders;
 import Listeners.EventHandler;
+import Products.Product;
+import Products.WebBuilder;
 import org.openqa.selenium.NoSuchElementException;
 
 import org.openqa.selenium.WebElement;
@@ -58,7 +60,7 @@ public  class OrderPage extends BasePage {
     private List<WebElement>addonsFields;
     @CacheLookup
     @FindBy(css = ".bold.item-name")
-    private List<WebElement>addonsDescription;
+    public List<WebElement>addonsDescription;
     @CacheLookup
     @FindBy(xpath = ".//*[@id='connect_to']/div[2]/div/div[2]/div[1]/div/div")
     private List<WebElement>own_new_domainRadiobutton;
@@ -185,7 +187,8 @@ public  class OrderPage extends BasePage {
 
 
     //--------Click on Order Product button ------------------------------
-    public RegisterPage  orderProduct(){
+    public RegisterPage  orderProduct() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        BasePage.createProduct();
         continueOrderButton.click();
         LOG.info("Click \"Continue Oder\" button");
         return new RegisterPage(eventDriver);

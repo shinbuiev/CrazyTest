@@ -28,7 +28,7 @@ public class HostingTests extends BaseTest {
     }
 
     @Test(dataProviderClass = DataProviders.class,dataProvider = "provider")
-    public void successProductBuy(int switcher,int planNumber){
+    public void successProductBuy(int switcher,int planNumber) throws IllegalAccessException, ClassNotFoundException, InstantiationException {
         BuyPage buyPage=new BuyPage(getEventDriver());
         buyPage.switchButton(switcher,planNumber);
         OrderPage orderPage=buyPage.buyPlan(planNumber);

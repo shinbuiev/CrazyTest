@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit;
  * Created by Dmitriy.F on 07.11.2016.
  */
 public abstract class BaseTest {
-    private WebDriver driver;
-    private EventFiringWebDriver eventDriver;
+    public static WebDriver driver;
+    public static EventFiringWebDriver eventDriver;
     public static String testName;
 
 
