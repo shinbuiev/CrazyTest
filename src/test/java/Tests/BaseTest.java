@@ -22,7 +22,7 @@ public abstract class BaseTest {
 
     public void initial(){
         testName=this.getClass().getName();
-        System.setProperty("webdriver.chrome.driver", "/home/frunoyman/Загрузки/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "C:\\\\Automation\\\\chromedriver\\\\chromedriver.exe");
         driver=new ChromeDriver();
         eventDriver=new EventFiringWebDriver(driver);
         eventDriver.manage().window().maximize();

@@ -18,6 +18,9 @@ public  class BuyPage extends BasePage {
     @FindBy(xpath = ".//*[@id='moving_object_container']/div/div/main/div/.//a[1]")
     private List<WebElement> buyPlanButton;
     @CacheLookup
+    @FindBy(xpath = ".//*[@id='moving_object_container']/div/div/main/div/.//a[2]")
+    private List<WebElement> webBuilderHideBuyPlanButton;
+    @CacheLookup
     @FindBy(className = "linux")
     private WebElement linuxButton;
     @CacheLookup
@@ -30,7 +33,7 @@ public  class BuyPage extends BasePage {
     @FindBy(className = "more_info_btn")
     private WebElement moreButton;
     @CacheLookup
-    @FindBy(className = "menuItemContent")
+    @FindBy(xpath = ".//*/div/div/div/ul/li/div/div/div/div[2]/div")
     private List<WebElement> webSiteBuilderOption;
     @CacheLookup
     @FindBy(className = "selectWrap")
@@ -51,7 +54,11 @@ public  class BuyPage extends BasePage {
     public OrderPage buyPlan(int plan) {
         LOG.info("Start buying \"" + productTitlePP.get(plan)
                 .getText() + " " + planSpecification.get(plan).getText().replace("\n", " ") + "\" plan");
-        buyPlanButton.get(plan).click();
+        if(buyPlanButton.get(plan).isDisplayed()){
+            buyPlanButton.get(plan).click();
+        }else if(webBuilderHideBuyPlanButton.get(plan).isDisplayed()) {
+            webBuilderHideBuyPlanButton.get(plan).click();
+        }
         return new OrderPage(eventDriver);
     }
 
@@ -64,9 +71,8 @@ public  class BuyPage extends BasePage {
                 LOG.info("Switch to Windows Hosting");
             } else if (curURL.contains("web-builder")) {
                     webSiteBuilderDropdown.get(plan).click();
-                    webSiteBuilderOption.get(1).click();
+                    webSiteBuilderOption.get(0).click();
                     LOG.info("Switch to \"" + planSpecification.get(plan / 4).getText() + "\"");
-                
             }
         }
     }
